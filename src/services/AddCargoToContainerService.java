@@ -4,14 +4,14 @@ import domain.Cargo;
 
 public class AddCargoToContainerService {
 
-    public int[][] addToContainer(int startCoordinateLength, int startCoordinateWidth, int[][] array, Cargo cargo) {
+    public Integer[][] addToContainer(Integer startCoordinateLength, Integer startCoordinateWidth, Integer[][] array, Cargo cargo) {
 
-        int cargoLength = cargo.getLength();
-        int cargoWidth = cargo.getWidth();
-        int cargoNumber = cargo.getCargoId();
+        Integer cargoLength = cargo.getLength();
+        Integer cargoWidth = cargo.getWidth();
+        Integer cargoNumber = cargo.getCargoId();
 
-        for(int i = startCoordinateLength; i < startCoordinateLength + cargoLength; i++) {
-            for(int j = startCoordinateWidth; j < startCoordinateWidth + cargoWidth; j++) {
+        for(Integer i = startCoordinateLength; i < startCoordinateLength + cargoLength; i++) {
+            for(Integer j = startCoordinateWidth; j < startCoordinateWidth + cargoWidth; j++) {
                 array[i][j] = cargoNumber;
             }
         }
