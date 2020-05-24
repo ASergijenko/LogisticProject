@@ -6,6 +6,7 @@ import java.util.Map;
 
 public class main {
     public static void main(String[] args) {
+        /////////////////////////////////ADD SPRING
         ContainerCreationService containerCreationService = new ContainerCreationService();
         ContainerToConsoleViewService containerToConsoleViewService = new ContainerToConsoleViewService();
         AddCargoToContainerService addCargoToContainerService = new AddCargoToContainerService();
@@ -19,27 +20,13 @@ public class main {
         addCargoToContainerService.addToContainer(1,1,createdContainer, cargo);
 
         Cargo cargo2 = new Cargo(731,3, 3);
-        Integer[] calculatedCoordinates = findSpaceForCargoService.coordinatesForCargo(createdContainer);
+        Integer[] calculatedCoordinate = findSpaceForCargoService.coordinatesForCargo(createdContainer);
 
-        addCargoToContainerService.addToContainer(calculatedCoordinates[0], calculatedCoordinates[1],createdContainer, cargo2);
-
+        addCargoToContainerService.addToContainer(calculatedCoordinate[0], calculatedCoordinate[1],createdContainer, cargo2);
 
         containerToConsoleViewService.printToConsole(createdContainer);
-
-        ArrayList<Map<Integer, Integer>> foundCoordinates = findFreeCoordinatesForNowService.findCoordinates(createdContainer);
-        for (int i = 0; i < foundCoordinates.toArray().length; i++) {
-            Map<Integer, Integer> foundMapCoordinates = foundCoordinates.get(i);
-            foundMapCoordinates.forEach((key, value) -> System.out.println(key + ":" + value));
-        }
-
     }
 }
-
-
-
-
-
-
 
 
 /*test cases*/
