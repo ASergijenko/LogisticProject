@@ -25,9 +25,15 @@ public class main {
         addCargoToContainerService.addToContainer(calculatedCoordinate[0], calculatedCoordinate[1],createdContainer, cargo2);
 
         containerToConsoleViewService.printToConsole(createdContainer);
+
+        ArrayList<Map<Integer, Integer>> foundCoordinates = findFreeCoordinatesForNowService.findCoordinates(createdContainer);
+        for (int i = 0; i < foundCoordinates.toArray().length; i++) {
+            Map<Integer, Integer> foundMapCoordinates = foundCoordinates.get(i);
+            foundMapCoordinates.forEach((key, value) -> System.out.println(key + ":" + value));
+        }
+
     }
 }
-
 
 /*test cases*/
 /*        ArrayList<Map<Integer, Integer>> foundCoordinates = findFreeCoordinatesForNowService.findCoordinates(createdContainer);
@@ -35,3 +41,5 @@ public class main {
             Map<Integer, Integer> foundMapCoordinates = foundCoordinates.get(i);
             foundMapCoordinates.forEach((key, value) -> System.out.println(key + ":" + value));
         }*/
+
+

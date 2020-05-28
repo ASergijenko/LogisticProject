@@ -13,6 +13,9 @@ public class Cargo {
     private int totalWeight;
     private String comments;
 
+    public Cargo() {
+    }
+
     public Cargo(int cargoId, int containerNumber, int length, int width, int height, int weight, boolean isStackable, int quantity, int totalWeight, String comments) {
         this.cargoId = cargoId;
         this.containerNumber = containerNumber;
