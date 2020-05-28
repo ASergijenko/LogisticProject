@@ -1,7 +1,9 @@
-package services;
+package com.logisticproject.services;
 
-import domain.Cargo;
+import com.logisticproject.domain.Cargo;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AddCargoToContainerService {
 
     public Integer[][] addToContainer(Integer startCoordinateLength, Integer startCoordinateWidth, Integer[][] array, Cargo cargo) {

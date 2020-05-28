@@ -1,5 +1,8 @@
-package services;
+package com.logisticproject.services;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class ContainerCreationService {
 
     public Integer[][] create(int length, int width) {

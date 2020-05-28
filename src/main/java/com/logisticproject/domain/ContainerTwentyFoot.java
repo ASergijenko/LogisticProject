@@ -1,4 +1,4 @@
-package domain;
+package com.logisticproject.domain;
 
 public class ContainerTwentyFoot {
 

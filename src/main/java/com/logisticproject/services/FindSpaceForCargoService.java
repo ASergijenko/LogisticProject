@@ -1,10 +1,11 @@
-package services;
+package com.logisticproject.services;
 
-import domain.Cargo;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Map;
 
+@Component
 public class FindSpaceForCargoService {
 
     public Integer[] coordinatesForCargo(Integer[][] container/*, Cargo cargo*/) {

@@ -1,4 +1,4 @@
-package domain;
+package com.logisticproject.domain;
 
 public class Cargo {
 
@@ -147,5 +147,21 @@ public class Cargo {
         result = 31 * result + totalWeight;
         result = 31 * result + (comments != null ? comments.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Cargo{" +
+                "cargoId=" + cargoId +
+                ", containerNumber=" + containerNumber +
+                ", length=" + length +
+                ", width=" + width +
+                ", height=" + height +
+                ", weight=" + weight +
+                ", isStackable=" + isStackable +
+                ", quantity=" + quantity +
+                ", totalWeight=" + totalWeight +
+                ", comments='" + comments + '\'' +
+                '}';
     }
 }
