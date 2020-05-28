@@ -33,17 +33,33 @@ public class ExcelParsingService {
 
                 switch (columnIndex) {
                     case 1:
-                        aCargo.setTitle((String) getCellValue(nextCell));
+                        aCargo.setCargoId((int) getCellValue(nextCell));
                         break;
                     case 2:
-                        aCargo.setAuthor((String) getCellValue(nextCell));
+                        aCargo.setLength((int) getCellValue(nextCell));
                         break;
                     case 3:
-                        aCargo.setPrice((double) getCellValue(nextCell));
+                        aCargo.setWidth((int) getCellValue(nextCell));
+                        break;
+                    case 4:
+                        aCargo.setHeight((int) getCellValue(nextCell));
+                        break;
+                    case 5:
+                        aCargo.setWeight((int) getCellValue(nextCell));
+                        break;
+                    case 6:
+                        aCargo.setStackable((boolean) getCellValue(nextCell));
+                        break;
+                    case 7:
+                        aCargo.setQuantity((int) getCellValue(nextCell));
+                        break;
+                    case 8:
+                        aCargo.setTotalWeight((int) getCellValue(nextCell));
+                        break;
+                    case 9:
+                        aCargo.setComments((String) getCellValue(nextCell));
                         break;
                 }
-
-
             }
             cargoList.add(aCargo);
         }

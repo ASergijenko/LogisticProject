@@ -1,11 +1,13 @@
 import domain.Cargo;
 import services.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         /////////////////////////////////ADD SPRING
         ContainerCreationService containerCreationService = new ContainerCreationService();
         ContainerToConsoleViewService containerToConsoleViewService = new ContainerToConsoleViewService();
@@ -31,6 +33,12 @@ public class main {
             Map<Integer, Integer> foundMapCoordinates = foundCoordinates.get(i);
             foundMapCoordinates.forEach((key, value) -> System.out.println(key + ":" + value));
         }
+
+        String excelFilePath = "C:/Users/aserg/Desktop/Logistics/Table.xlsx";
+        ExcelParsingService reader = new ExcelParsingService();
+        List<Cargo> listBooks = reader.getCargoList(excelFilePath);
+        System.out.println(listBooks);
+
 
     }
 }
