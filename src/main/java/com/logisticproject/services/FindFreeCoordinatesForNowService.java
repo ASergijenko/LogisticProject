@@ -1,9 +1,12 @@
-package services;
+package com.logisticproject.services;
+
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 public class FindFreeCoordinatesForNowService {
 
     public ArrayList<Map<Integer, Integer>> findCoordinates(Integer[][] array) {
