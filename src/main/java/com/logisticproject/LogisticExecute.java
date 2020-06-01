@@ -2,6 +2,7 @@ package com.logisticproject;
 
 import com.logisticproject.domain.Cargo;
 import com.logisticproject.services.*;
+import com.logisticproject.services.validations.CargoValidationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -41,7 +42,10 @@ public class LogisticExecute {
 
 
         //////////print parsed data from collection
-        String excelFilePath = "C:/Users/Grigorijs Skulteckis/Desktop/Programs/Table.xlsx";
+        //Aleksandr
+        //String excelFilePath = "C:/Users/aserg/Desktop/Logistics/Table.xlsx";
+        //Grigorij
+        String excelFilePath = "C:/Users/Grigorijs Skulteckis/Google Drive/Данные/Логистический вопрос/SampleData/Table.xlsx";
         List<Cargo> listBooks = reader.getCargoList(excelFilePath);
         for (Cargo cargo3 : listBooks) {
             System.out.println(cargo3);

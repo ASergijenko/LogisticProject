@@ -1,6 +1,7 @@
 package com.logisticproject.services;
 
 import com.logisticproject.domain.Cargo;
+import com.logisticproject.services.validations.CargoValidationService;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Component;
@@ -14,6 +15,8 @@ import java.util.Objects;
 
 @Component
 public class ExcelParsingService {
+
+    CargoValidationService cargoValidationService = new CargoValidationService();
 
     private Object getCellValue(Cell cell) {
         switch (cell.getCellType()) {
@@ -30,7 +33,7 @@ public class ExcelParsingService {
     private boolean booleanCellValue(Object o) {
         return o.equals("yes");
     }
-///tests
+
     private int integerCellValue(Object o) {
         return (int)(double)o;
     }
@@ -82,6 +85,7 @@ public class ExcelParsingService {
                         break;
                 }
             }
+            cargoValidationService.validate(cargo);
             cargoList.add(cargo);
         }
 
