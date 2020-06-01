@@ -1,30 +1,25 @@
 package com.logisticproject.services.validations;
 
+import com.logisticproject.constants.ErrorMessages;
+import com.logisticproject.constants.TwentyFootContainer;
 import com.logisticproject.domain.Cargo;
-import com.logisticproject.domain.ContainerTwentyFoot;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CargoSizeValidation implements ValidationRule<Cargo> {
 
-    ContainerTwentyFoot containerTwentyFoot = new ContainerTwentyFoot();
-
-    public String lengthErrorMessage = "Cargo length is greater than container length";
-    public String widthErrorMessage = "Cargo width is greater than container width";
-
     @Override
     public void validate(Cargo newCargo) {
-        String errorLogs = null;
-        if (newCargo.getLength() >= containerTwentyFoot.getLength()) {
-            errorLogs = lengthErrorMessage;
+        List<String> errorLogs = new ArrayList<>();
+        if (newCargo.getLength() >= TwentyFootContainer.LENGTH) {
+            errorLogs.add(ErrorMessages.CARGO_LENGTH);
         }
-        if (newCargo.getWidth() >= containerTwentyFoot.getWidth()) {
-            if (errorLogs != null) {
-                errorLogs = errorLogs + ", " + widthErrorMessage;
-            } else {
-                errorLogs = widthErrorMessage;
-            }
+        if (newCargo.getWidth() >= TwentyFootContainer.WIDTH) {
+            errorLogs.add(ErrorMessages.CARGO_WIDTH);
         }
-        if (errorLogs != null) {
-            throw new ValidationException(errorLogs);
+        if (!errorLogs.isEmpty()) {
+            throw new ValidationException(errorLogs.toString());
         }
     }
 }
