@@ -2,7 +2,6 @@ package com.logisticproject;
 
 import com.logisticproject.domain.Cargo;
 import com.logisticproject.services.*;
-import com.logisticproject.services.validations.CargoValidationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,14 +12,15 @@ import java.util.Map;
 @Component
 public class LogisticExecute {
 
+    @Autowired private ContainerCreationService containerCreationService;
+    @Autowired private ContainerToConsoleViewService containerToConsoleViewService;
+    @Autowired private AddCargoToContainerService addCargoToContainerService;
+    @Autowired private FindFreeCoordinatesForNowService findFreeCoordinatesForNowService;
+    @Autowired private FindSpaceForCargoService findSpaceForCargoService;
+    @Autowired private ExcelParsingService reader;
+
     public void execute() throws Exception {
         /////////////////////////////////Modify SPRING
-        ContainerCreationService containerCreationService = new ContainerCreationService();
-        ContainerToConsoleViewService containerToConsoleViewService = new ContainerToConsoleViewService();
-        AddCargoToContainerService addCargoToContainerService = new AddCargoToContainerService();
-        FindFreeCoordinatesForNowService findFreeCoordinatesForNowService = new FindFreeCoordinatesForNowService();
-        FindSpaceForCargoService findSpaceForCargoService = new FindSpaceForCargoService();
-        ExcelParsingService reader = new ExcelParsingService();
 
 
         //////////////cargo tests
@@ -45,7 +45,7 @@ public class LogisticExecute {
         //Aleksandr
         //String excelFilePath = "C:/Users/aserg/Desktop/Logistics/Table.xlsx";
         //Grigorij
-        String excelFilePath = "C:/Users/Grigorijs Skulteckis/Google Drive/Данные/Логистический вопрос/SampleData/Table.xlsx";
+        String excelFilePath = "C:/Users/aserg/Desktop/Logistics/Table.xlsx";
         List<Cargo> listBooks = reader.getCargoList(excelFilePath);
         for (Cargo cargo3 : listBooks) {
             System.out.println(cargo3);

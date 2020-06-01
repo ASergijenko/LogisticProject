@@ -4,6 +4,7 @@ import com.logisticproject.domain.Cargo;
 import com.logisticproject.services.validations.CargoValidationService;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -16,7 +17,7 @@ import java.util.Objects;
 @Component
 public class ExcelParsingService {
 
-    CargoValidationService cargoValidationService = new CargoValidationService();
+    @Autowired private CargoValidationService cargoValidationService;
 
     private Object getCellValue(Cell cell) {
         switch (cell.getCellType()) {

@@ -1,10 +1,12 @@
 package com.logisticproject.services.validations;
 
 import com.logisticproject.domain.Cargo;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class CargoValidationService implements ValidationRule<Cargo> {
 
     private final List<ValidationRule<Cargo>> validationRules = new ArrayList<>();

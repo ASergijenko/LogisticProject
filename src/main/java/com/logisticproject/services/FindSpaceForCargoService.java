@@ -1,5 +1,6 @@
 package com.logisticproject.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -8,9 +9,10 @@ import java.util.Map;
 @Component
 public class FindSpaceForCargoService {
 
+    @Autowired private FindFreeCoordinatesForNowService findFreeCoordinatesForNowService;
+
     public Integer[] coordinatesForCargo(Integer[][] container/*, Cargo cargo*/) {
         Integer[] array = new Integer[2];
-        FindFreeCoordinatesForNowService findFreeCoordinatesForNowService = new FindFreeCoordinatesForNowService();
         ArrayList<Map<Integer, Integer>> freeCoordinatesForNow = findFreeCoordinatesForNowService.findCoordinates(container);
 
         //validation, rotation of cargo, deleting of unsuitable coordinates?
