@@ -30,7 +30,7 @@ public class ExcelParsingService {
     private boolean booleanCellValue(Object o) {
         return o.equals("yes");
     }
-
+///test
     private int integerCellValue(Object o) {
         return (int)(double)o;
     }

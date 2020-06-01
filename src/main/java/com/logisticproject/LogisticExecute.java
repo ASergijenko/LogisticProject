@@ -41,7 +41,7 @@ public class LogisticExecute {
 
 
         //////////print parsed data from collection
-        String excelFilePath = "C:/Users/aserg/Desktop/Logistics/Table.xlsx";
+        String excelFilePath = "C:/Users/Grigorijs Skulteckis/Desktop/Programs/Table.xlsx";
         List<Cargo> listBooks = reader.getCargoList(excelFilePath);
         for (Cargo cargo3 : listBooks) {
             System.out.println(cargo3);
