@@ -18,6 +18,7 @@ public class LogisticExecute {
     @Autowired private FindFreeCoordinatesForNowService findFreeCoordinatesForNowService;
     @Autowired private FindSpaceForCargoService findSpaceForCargoService;
     @Autowired private ExcelParsingService reader;
+    @Autowired private ListSortingService listSortingService;
 
     public void execute() throws Exception {
         /////////////////////////////////Modify SPRING
@@ -40,16 +41,20 @@ public class LogisticExecute {
             foundMapCoordinates.forEach((key, value) -> System.out.println(key + ":" + value));
         }
 
-
         //////////print parsed data from collection
-        //Aleksandr
+        //Aleksandr home
         //String excelFilePath = "C:/Users/aserg/Desktop/Logistics/Table.xlsx";
         //Grigorij
-        String excelFilePath = "C:/Users/aserg/Desktop/Logistics/Table.xlsx";
+
+        String excelFilePath = "C:/Users/Aleksandr Sergijenko/Downloads/Table.xlsx";
         List<Cargo> listBooks = reader.getCargoList(excelFilePath);
         for (Cargo cargo3 : listBooks) {
             System.out.println(cargo3);
         }
 
+        List<Cargo> sortedCargoList = listSortingService.sort(listBooks);
+        for (Cargo cargo4 : listBooks) {
+            System.out.println(cargo4);
+        }
     }
 }
