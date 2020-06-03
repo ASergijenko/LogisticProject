@@ -52,6 +52,8 @@ public class LogisticExecute {
             System.out.println(cargo3);
         }
 
+        System.out.println("sorted list");
+
         List<Cargo> sortedCargoList = listSortingService.sort(listBooks);
         for (Cargo cargo4 : listBooks) {
             System.out.println(cargo4);
