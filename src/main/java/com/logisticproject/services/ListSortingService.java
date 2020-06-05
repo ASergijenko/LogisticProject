@@ -8,10 +8,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class ListSortingService {
+public class ListSortingService{
 
     public List<Cargo> sort(List<Cargo> cargoList) {
-        //swap
         for (Cargo cargo : cargoList) {
             int temp = 0;
             if (cargo.getLength() < cargo.getWidth()) {
@@ -20,6 +19,8 @@ public class ListSortingService {
                 cargo.setLength(temp);
             }
         }
-        return cargoList.stream().sorted(Comparator.comparingInt(Cargo::getLength).reversed()).collect(Collectors.toList());
+        return cargoList.stream()
+                .sorted(Comparator.comparing(Cargo::getLength).thenComparing(Cargo::getWidth).reversed())
+                .collect(Collectors.toList());
     }
 }

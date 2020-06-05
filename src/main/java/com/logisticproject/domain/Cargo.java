@@ -2,15 +2,15 @@ package com.logisticproject.domain;
 
 public class Cargo {
 
-    private int cargoId;
-    private int containerNumber;
-    private int length;
-    private int width;
-    private int height;
-    private int weight;
+    private Integer cargoId;
+    private Integer containerNumber;
+    private Integer length;
+    private Integer width;
+    private Integer height;
+    private Integer weight;
     private boolean isStackable;
-    private int quantity;
-    private int totalWeight;
+    private Integer quantity;
+    private Integer totalWeight;
     private String comments;
 
     public Cargo() {
@@ -35,51 +35,51 @@ public class Cargo {
         this.width = width;
     }
 
-    public int getCargoId() {
+    public Integer getCargoId() {
         return cargoId;
     }
 
-    public void setCargoId(int cargoId) {
+    public void setCargoId(Integer cargoId) {
         this.cargoId = cargoId;
     }
 
-    public int getContainerNumber() {
+    public Integer getContainerNumber() {
         return containerNumber;
     }
 
-    public void setContainerNumber(int containerNumber) {
+    public void setContainerNumber(Integer containerNumber) {
         this.containerNumber = containerNumber;
     }
 
-    public int getLength() {
+    public Integer getLength() {
         return length;
     }
 
-    public void setLength(int length) {
+    public void setLength(Integer length) {
         this.length = length;
     }
 
-    public int getWidth() {
+    public Integer getWidth() {
         return width;
     }
 
-    public void setWidth(int width) {
+    public void setWidth(Integer width) {
         this.width = width;
     }
 
-    public int getHeight() {
+    public Integer getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(Integer height) {
         this.height = height;
     }
 
-    public int getWeight() {
+    public Integer getWeight() {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(Integer weight) {
         this.weight = weight;
     }
 
@@ -91,19 +91,19 @@ public class Cargo {
         isStackable = stackable;
     }
 
-    public int getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 
-    public int getTotalWeight() {
+    public Integer getTotalWeight() {
         return totalWeight;
     }
 
-    public void setTotalWeight(int totalWeight) {
+    public void setTotalWeight(Integer totalWeight) {
         this.totalWeight = totalWeight;
     }
 
@@ -164,4 +164,7 @@ public class Cargo {
                 ", comments='" + comments + '\'' +
                 '}';
     }
+
+
+
 }
