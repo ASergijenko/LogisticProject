@@ -41,19 +41,19 @@ public class SortingMain {
 
                         //>>>>>
                         //Находим КСТК с максимальной площ. из Репозитория КСТК
-                        additionalMethods.setKSTKwithMaximumAreaToTPNK();
+                        additionalMethods.setKSTKwithMaximumAreaToTPMK();
                         //<<<<<
                         do{
                             //Заполнение "карманов"
 
                             //>>>>>
                             //Берем первую точку КСТК из репозитория = Точка построения
-                            additionalMethods.setTPfromRepositoryKSTK();
+                            int numberActualKSTK = additionalMethods.setTPfromRepositoryKSTK();
                             //<<<<<
 
                             //>>>>>
                             //обозначение границ малого "кармана"
-                            additionalMethods.designationSmallContainerBorders();
+                            additionalMethods.designationSmallContainerBorders(numberActualKSTK);
                             //<<<<<
 
                             //>>>>>
@@ -78,10 +78,11 @@ public class SortingMain {
                         containerFinished = true;
                     }
                 } while (!containerFinished);
+                System.out.println("Container '"+ variables.containerNumber + "' is filled;");
             } else {
                 cargoRemained = false;
             }
         } while (cargoRemained);
-
+        System.out.println("Cargo position is calculated. You will need '" + variables.containerNumber + "' containers;");
     }
 }
