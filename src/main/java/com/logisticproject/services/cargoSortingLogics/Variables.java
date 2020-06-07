@@ -1,5 +1,11 @@
 package com.logisticproject.services.cargoSortingLogics;
 
+import com.logisticproject.domain.Cargo;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+
+@Component
 public class Variables {
 
     public int containerNumber = 0;
@@ -12,6 +18,8 @@ public class Variables {
     //точка построения (TП)
     public int TP_Y_Axis;
     public int TP_X_Axis;
+
+    public List<Cargo> cargoList;
 
    public void setTPMK(int axisX, int axisY){
        this.TPMK_X_Axis = axisX;

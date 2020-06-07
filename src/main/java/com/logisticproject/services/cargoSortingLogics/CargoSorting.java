@@ -1,29 +1,42 @@
 package com.logisticproject.services.cargoSortingLogics;
 
 import com.logisticproject.constants.TwentyFootContainer;
+import com.logisticproject.domain.Cargo;
+import com.logisticproject.domain.Container;
+import com.logisticproject.services.ContainerCreationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-public class SortingMain {
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@Component
+public class CargoSorting {
+
+    @Autowired private ContainerCreationService containerCreationService;
+    @Autowired private Variables variables;
+    @Autowired private ContainerFillingAlgorithm containerFillingAlgorithm;
+    @Autowired private AdditionalMethods additionalMethods;
+
     //>>>>>
     //будет добавлена  логика
     //<<<<<
 
-    private final Variables variables = new Variables();
-    private final ContainerFillingAlgorithm containerFillingAlgorithm = new ContainerFillingAlgorithm(variables);
-    private final AdditionalMethods additionalMethods = new AdditionalMethods(variables);
-
-    public void cargoSortingProcess() {
+    public Map<Integer, Integer[][]> cargoSortingProcess() {
         boolean cargoRemained = true;
         boolean containerFinished = false;
         boolean leftAnyKSTK = true;
+        Map<Integer, Integer[][]> containerList = new HashMap<>();
 
         do {
             //Сортировка грузов
+            if (additionalMethods.existNotUsedCargo()) {
+                //Создание контейнера
+                Container container = new Container(TwentyFootContainer.LENGTH, TwentyFootContainer.WIDTH, variables.containerNumber++);
+                Integer[][] containerArray = containerCreationService.create(container.getContainerLength(), container.getContainerWidth());
+                containerList.put(container.getContainerNumber(), containerArray);
 
-            //>>>>>
-            //Еще остались грузы в DB1?
-            if (true) {//true заменить на логику ДА
-                //<<<<<
-                variables.containerNumber++;
                 variables.setTPMK(1, 1);
                 variables.setBoards(TwentyFootContainer.WIDTH, TwentyFootContainer.LENGTH);
                 do {
@@ -84,5 +97,8 @@ public class SortingMain {
             }
         } while (cargoRemained);
         System.out.println("Cargo position is calculated. You will need '" + variables.containerNumber + "' containers;");
+
+    return containerList;
     }
+
 }

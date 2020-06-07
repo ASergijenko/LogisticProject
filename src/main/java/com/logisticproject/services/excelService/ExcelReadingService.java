@@ -1,7 +1,7 @@
-package com.logisticproject.services;
+package com.logisticproject.services.excelService;
 
 import com.logisticproject.domain.Cargo;
-import com.logisticproject.services.validations.CargoValidationService;
+import com.logisticproject.services.excelService.validations.CargoValidationService;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Component
-public class ExcelParsingService {
+public class ExcelReadingService {
 
     @Autowired private CargoValidationService cargoValidationService;
 
@@ -39,7 +39,7 @@ public class ExcelParsingService {
         return (int)(double)o;
     }
 
-    public List<Cargo> getCargoList(String excelFilePath) throws Exception {
+    public List<Cargo> read(String excelFilePath) throws Exception {
         List<Cargo> cargoList = new ArrayList<>();
         FileInputStream inputStream = new FileInputStream(new File(excelFilePath));
 

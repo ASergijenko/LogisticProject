@@ -1,5 +1,5 @@
-import com.logisticproject.LogisticExecute;
-import com.logisticproject.services.validations.ValidationException;
+import com.logisticproject.SortingMain;
+import com.logisticproject.services.excelService.validations.ValidationException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -9,8 +9,8 @@ public class Application {
 
         try {
             ApplicationContext applicationContext = new AnnotationConfigApplicationContext(SpringConfig.class);
-            LogisticExecute ui = applicationContext.getBean(LogisticExecute.class);
-            ui.execute();
+            SortingMain main = applicationContext.getBean(SortingMain.class);
+            main.execute();
         }catch (ValidationException e){
             System.out.println("Smotri ctro pishesh" + e.getMessage());
         }

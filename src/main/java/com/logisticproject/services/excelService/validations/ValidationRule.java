@@ -1,4 +1,4 @@
-package com.logisticproject.services.validations;
+package com.logisticproject.services.excelService.validations;
 
 public interface ValidationRule<T> {
 

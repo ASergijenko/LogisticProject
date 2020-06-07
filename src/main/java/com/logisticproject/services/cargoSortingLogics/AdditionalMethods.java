@@ -1,14 +1,15 @@
 package com.logisticproject.services.cargoSortingLogics;
 
 import com.logisticproject.constants.TwentyFootContainer;
+import com.logisticproject.domain.Cargo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AdditionalMethods {
 
-    private final Variables variables;
-
-    public AdditionalMethods(Variables variables) {
-        this.variables = variables;
-    }
+    @Autowired
+    private Variables variables;
 
     public void setKSTKwithMaximumAreaToTPMK() {
         //Находим КСТК с максимальной площ. из Репозитория КСТК
@@ -52,6 +53,15 @@ public class AdditionalMethods {
         //Yboard = TPMK Yvalue
         //...
         variables.setBoards(1, 1);//1 заменить на найденные значения
+    }
+
+    public boolean existNotUsedCargo() {
+        for (Cargo cargo : variables.cargoList) {
+            if (cargo.getContainerNumber() == null) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean repositoryKSTKcontainsNextPoint(int numberActualKSTK) {

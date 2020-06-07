@@ -1,4 +1,4 @@
-package com.logisticproject.services.validations;
+package com.logisticproject.services.excelService.validations;
 
 import com.logisticproject.domain.Cargo;
 import org.springframework.stereotype.Component;

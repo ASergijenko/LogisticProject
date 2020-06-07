@@ -11,7 +11,7 @@ public class FindSpaceForCargoService {
 
     @Autowired private FindTemporaryCoordinatesService findTemporaryCoordinatesService;
 
-    public Integer[] coordinatesForCargo(Integer[][] container/*, Cargo cargo*/) {
+/*    public Integer[] coordinatesForCargo(Integer[][] container*//*, Cargo cargo*//*) {
         Integer[] array = new Integer[2];
         ArrayList<Map<Integer, Integer>> freeCoordinatesForNow = findTemporaryCoordinatesService.findTemporaryCoordinates(container);
 
@@ -25,5 +25,5 @@ public class FindSpaceForCargoService {
             }
         }
         return array;
-    }
+    }*/
 }
