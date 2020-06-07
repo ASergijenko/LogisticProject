@@ -9,11 +9,11 @@ import java.util.Map;
 @Component
 public class FindSpaceForCargoService {
 
-    @Autowired private FindFreeCoordinatesForNowService findFreeCoordinatesForNowService;
+    @Autowired private FindTemporaryCoordinatesService findTemporaryCoordinatesService;
 
     public Integer[] coordinatesForCargo(Integer[][] container/*, Cargo cargo*/) {
         Integer[] array = new Integer[2];
-        ArrayList<Map<Integer, Integer>> freeCoordinatesForNow = findFreeCoordinatesForNowService.findCoordinates(container);
+        ArrayList<Map<Integer, Integer>> freeCoordinatesForNow = findTemporaryCoordinatesService.findTemporaryCoordinates(container);
 
         //validation, rotation of cargo, deleting of unsuitable coordinates?
         //something with container and cargo

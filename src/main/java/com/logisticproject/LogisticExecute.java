@@ -15,7 +15,7 @@ public class LogisticExecute {
     @Autowired private ContainerCreationService containerCreationService;
     @Autowired private ContainerToConsoleViewService containerToConsoleViewService;
     @Autowired private AddCargoToContainerService addCargoToContainerService;
-    @Autowired private FindFreeCoordinatesForNowService findFreeCoordinatesForNowService;
+    @Autowired private FindTemporaryCoordinatesService findTemporaryCoordinatesService;
     @Autowired private FindSpaceForCargoService findSpaceForCargoService;
     @Autowired private ExcelParsingService reader;
     @Autowired private ListSortingService listSortingService;
@@ -35,18 +35,22 @@ public class LogisticExecute {
 
 
         //////////////print found dots
-        ArrayList<Map<Integer, Integer>> foundCoordinates = findFreeCoordinatesForNowService.findCoordinates(createdContainer);
+        ArrayList<Map<Integer, Integer>> foundCoordinates = findTemporaryCoordinatesService.findTemporaryCoordinates(createdContainer);
         for (int i = 0; i < foundCoordinates.toArray().length; i++) {
             Map<Integer, Integer> foundMapCoordinates = foundCoordinates.get(i);
             foundMapCoordinates.forEach((key, value) -> System.out.println(key + ":" + value));
         }
 
         //////////print parsed data from collection
+        //Aleksandr work
+        //C:/Users/Aleksandr Sergijenko/Downloads/Table.xlsx
         //Aleksandr home
         //String excelFilePath = "C:/Users/aserg/Desktop/Logistics/Table.xlsx";
         //Grigorij
+        //
 
-        String excelFilePath = "C:/Users/Aleksandr Sergijenko/Downloads/Table.xlsx";
+
+        String excelFilePath = "C:/Users/aserg/Desktop/Logistics/Table.xlsx";
         List<Cargo> listBooks = reader.getCargoList(excelFilePath);
         for (Cargo cargo3 : listBooks) {
             System.out.println(cargo3);
