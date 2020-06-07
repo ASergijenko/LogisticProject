@@ -2,8 +2,10 @@ package com.logisticproject.services.cargoSortingLogics;
 
 import com.logisticproject.constants.TwentyFootContainer;
 import com.logisticproject.domain.Cargo;
+import com.logisticproject.domain.ConstructionPoint;
 import com.logisticproject.domain.Container;
 import com.logisticproject.services.ContainerCreationService;
+import com.logisticproject.services.FindTemporaryCoordinatesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +20,7 @@ public class CargoSorting {
     @Autowired private Variables variables;
     @Autowired private ContainerFillingAlgorithm containerFillingAlgorithm;
     @Autowired private AdditionalMethods additionalMethods;
+    @Autowired private FindTemporaryCoordinatesService findTemporaryCoordinatesService;
 
     //>>>>>
     //будет добавлена  логика
@@ -37,14 +40,16 @@ public class CargoSorting {
                 Integer[][] containerArray = containerCreationService.create(container.getContainerLength(), container.getContainerWidth());
                 containerList.put(container.getContainerNumber(), containerArray);
 
+                //     ConstructionPoint constructionPoint = new ConstructionPoint(1,1);
                 variables.setTPMK(1, 1);
+                variables.setTP(1,1);
                 variables.setBoards(TwentyFootContainer.WIDTH, TwentyFootContainer.LENGTH);
                 do {
                     //Заполнение контейнера
 
                     //>>>>>
                     //Алгоритм заполнения контейнера
-                    containerFillingAlgorithm.containerFilling();
+                    containerFillingAlgorithm.containerFilling(containerArray);
                     //<<<<<
 
                     //>>>>>
@@ -71,7 +76,7 @@ public class CargoSorting {
 
                             //>>>>>
                             //Алгоритм заполнения контейнера
-                            containerFillingAlgorithm.containerFilling();
+                            containerFillingAlgorithm.containerFilling(containerArray);
                             //<<<<<
 
                             //>>>>>

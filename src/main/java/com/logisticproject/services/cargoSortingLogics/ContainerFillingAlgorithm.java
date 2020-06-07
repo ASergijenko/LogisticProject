@@ -1,6 +1,5 @@
 package com.logisticproject.services.cargoSortingLogics;
 
-import com.logisticproject.constants.TwentyFootContainer;
 import com.logisticproject.domain.Cargo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -8,27 +7,25 @@ import org.springframework.stereotype.Component;
 @Component
 public class ContainerFillingAlgorithm {
 
-    @Autowired private Variables variables;
+    @Autowired
+    private Variables variables;
 
     private int Xlength;
     private int Ylength;
 
-    public void containerFilling() {
+    public void containerFilling(Integer[][] containerArray) {
+
         //Алгоритм заполнения контейнера
         boolean newCargoCanBeInsert = true;
         do {
-            lengthCalculation();
-            if (existCargoForFindedLength()) {
-                //>>>>>
-                Cargo selectedCargo = null;//null заменить на найденные значения
-                //Из DB1 Выбираем груз:
-                //    *с пустым полем Container number;
-                //    *  с самой длинной стороной У
-                //<<<<<
+            lengthCalculation(containerArray);
+            if (existCargoForFoundLength()) {
+                Cargo selectedCargo = chosenCargo();
                 if (selectedCargo.getLength() <= Xlength * 0.90) {
-                    //>>>>>
                     //меняем значения сторон cargo (Х и У)
-                    //<<<<<
+                    int width = selectedCargo.getWidth();
+                    selectedCargo.setWidth(selectedCargo.getLength());
+                    selectedCargo.setLength(width);
                 }
                 //>>>>>
                 //Устанавливанем груз в точку построения
@@ -52,25 +49,65 @@ public class ContainerFillingAlgorithm {
         } while (newCargoCanBeInsert);
     }
 
-    private void lengthCalculation() {
-        //Нахождение растояния по X и Y до препятствия от точки построения, не больше Xboard и  Yboard
-        //...
 
-        Xlength = 0;//0 заменить на найденные значения
-        Ylength = 0;//0 заменить на найденные значения
+    //dorabotatj poljubomu govnokod
+    private void lengthCalculation(Integer[][] containerArray) {
+        //Нахождение растояния по X и Y до препятствия от точки построения, не больше Xboard и  Yboard от ТПМК
+        int xIterations = 0;
+        int yIterations = 0;
+
+        int maxX = variables.TPMK_X_Axis + variables.Xboard;
+        int maxY = variables.TPMK_Y_Axis + variables.Yboard;
+
+        for (int i = 0; i < maxX; i++) {
+            xIterations++;
+            if (containerArray[variables.TP_Y_Axis][i] != null) {
+//               break;
+                i = maxX;
+                xIterations--;
+            }
+        }
+
+        for (int i = 0; i < maxY; i++) {
+            yIterations++;
+            if (containerArray[i][variables.TP_X_Axis] != null) {
+//               break;
+                i = maxY;
+                yIterations--;
+            }
+        }
+
+        Xlength = xIterations;
+        Ylength = yIterations;
     }
-
-    private boolean existCargoForFindedLength() {
+//cjdvtcnbnm ldf vtnjlf
+    private boolean existCargoForFoundLength() {
         //можно что нибудь всунуть в  расстояния до объектов по Хlenght и Уlenght от выбранной ТП
-        //итерация по DB1...
-        int cargoAxisY = 0;//0 заменить на размеры груза
-        int cargoAxisX = 0;//0 заменить на размеры груза
-        if (variables.TP_Y_Axis + Ylength <= variables.Yboard && variables.TP_Y_Axis + Ylength <= cargoAxisY) {
-            if (variables.TP_X_Axis + Xlength <= variables.Xboard && variables.TP_X_Axis + Xlength <= cargoAxisX) {
-                return true;
+        for (Cargo cargo : variables.cargoList) {
+            if (variables.TP_Y_Axis + Ylength <= variables.Yboard && variables.TP_Y_Axis + Ylength <= cargo.getLength()) {
+                if (variables.TP_X_Axis + Xlength <= variables.Xboard && variables.TP_X_Axis + Xlength <= cargo.getWidth()) {
+                    return true;
+                }
             }
         }
         return false;
+    }
+
+    private Cargo chosenCargo() {
+        //Из DB1 Выбираем груз:
+        //    *с пустым полем Container number;
+        //    *  с самой длинной стороной У
+
+
+        Cargo chosenCargo = new Cargo();
+        for (Cargo cargo : variables.cargoList) {
+            if (cargo.getContainerNumber() == null) {
+                if (cargo.getLength() > chosenCargo.getLength()) {
+                    chosenCargo = cargo;
+                }
+            }
+        }
+        return chosenCargo;
     }
 
 }
