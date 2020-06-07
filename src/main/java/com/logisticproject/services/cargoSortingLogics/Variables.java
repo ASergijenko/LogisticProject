@@ -13,7 +13,6 @@ public class Variables {
     public int TP_Y_Axis;
     public int TP_X_Axis;
 
-
    public void setTPMK(int axisX, int axisY){
        this.TPNK_X_Axis = axisX;
        this.TPNK_Y_Axis = axisY;

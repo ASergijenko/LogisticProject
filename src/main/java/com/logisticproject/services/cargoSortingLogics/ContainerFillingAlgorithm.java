@@ -13,6 +13,7 @@ public class ContainerFillingAlgorithm {
     private int containerNumber;
 
     public void containerFilling(){
+        //Алгоритм заполнения контейнера
 
     }
 

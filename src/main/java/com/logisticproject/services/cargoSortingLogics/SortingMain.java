@@ -25,8 +25,7 @@ public class SortingMain {
                 //<<<<<
                 variables.containerNumber++;
                 variables.setTPMK(1, 1);
-                variables.Xboard = TwentyFootContainer.WIDTH;
-                variables.Yboard = TwentyFootContainer.LENGTH;
+                variables.setBoards(TwentyFootContainer.WIDTH, TwentyFootContainer.LENGTH);
                 do {
                     //Заполнение контейнера
 
@@ -48,7 +47,7 @@ public class SortingMain {
                             //Заполнение "карманов"
 
                             //>>>>>
-                            //Берем первую точку КСТК = Точка построения
+                            //Берем первую точку КСТК из репозитория = Точка построения
                             additionalMethods.setTPfromRepositoryKSTK();
                             //<<<<<
 
@@ -70,6 +69,10 @@ public class SortingMain {
                             }
                         }while (leftAnyKSTK);
 
+                        //>>>>>
+                        //нахождение границ следующего большого контейнера
+                        additionalMethods.designationBigContainerBorders();
+                        //<<<<<
 
                     } else {
                         containerFinished = true;
