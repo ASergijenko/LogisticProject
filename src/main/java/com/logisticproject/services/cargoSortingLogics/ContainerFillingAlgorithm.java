@@ -1,32 +1,49 @@
 package com.logisticproject.services.cargoSortingLogics;
 
 import com.logisticproject.domain.Cargo;
+import com.logisticproject.domain.Point;
+import com.logisticproject.services.cargoSortingLogics.containerFIllingAlgoritmMethods.CargoChoosingService;
+import com.logisticproject.services.cargoSortingLogics.containerFIllingAlgoritmMethods.LengthCalculator;
+import com.logisticproject.services.cargoSortingLogics.containerFIllingAlgoritmMethods.RemovePointFromRepository;
+import com.logisticproject.services.cargoSortingLogics.containerFIllingAlgoritmMethods.TP_PointCalculation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class ContainerFillingAlgorithm {
 
     @Autowired
-    private Variables variables;
+    TP_PointCalculation tp_pointCalculation;
+    @Autowired
+    RemovePointFromRepository removePointFromRepository;
+    @Autowired
+    LengthCalculator lengthCalculator;
+    @Autowired
+    CargoChoosingService cargoChoosingService;
 
-    private int Xlength;
-    private int Ylength;
-
-    public void containerFilling(Integer[][] containerArray) {
+    public void containerFilling(List<Cargo> cargoList, Integer[][] containerArray, List<Point> pointRepository, Point TP_Point, Point TPNK_Point, Point boards) {
 
         //Алгоритм заполнения контейнера
         boolean newCargoCanBeInsert = true;
         do {
-            lengthCalculation(containerArray);
-            if (existCargoForFoundLength()) {
-                Cargo selectedCargo = chosenCargo();
-                if (selectedCargo.getLength() <= Xlength * 0.90) {
+            TP_Point = tp_pointCalculation.calcTpPoint(pointRepository, TP_Point, TPNK_Point);
+            pointRepository = removePointFromRepository.removePointFromRepository(TP_Point, pointRepository);
+            Point length = lengthCalculator.calculateLength(containerArray, TPNK_Point, TP_Point, boards);
+            Cargo selectedCargo = cargoChoosingService.chooseCargo(cargoList, TP_Point, length, boards);
+            if (selectedCargo != null) {
+                if (selectedCargo.getLength() <= length.getValueX() * 0.90) {
                     //меняем значения сторон cargo (Х и У)
                     int width = selectedCargo.getWidth();
                     selectedCargo.setWidth(selectedCargo.getLength());
                     selectedCargo.setLength(width);
                 }
+
+
+
+
+
                 //>>>>>
                 //Устанавливанем груз в точку построения
                 //<<<<<
@@ -48,66 +65,4 @@ public class ContainerFillingAlgorithm {
             //<<<<<
         } while (newCargoCanBeInsert);
     }
-
-
-    //dorabotatj poljubomu govnokod
-    private void lengthCalculation(Integer[][] containerArray) {
-        //Нахождение растояния по X и Y до препятствия от точки построения, не больше Xboard и  Yboard от ТПМК
-        int xIterations = 0;
-        int yIterations = 0;
-
-        int maxX = variables.TPMK_X_Axis + variables.Xboard;
-        int maxY = variables.TPMK_Y_Axis + variables.Yboard;
-
-        for (int i = 0; i < maxX; i++) {
-            xIterations++;
-            if (containerArray[variables.TP_Y_Axis][i] != null) {
-//               break;
-                i = maxX;
-                xIterations--;
-            }
-        }
-
-        for (int i = 0; i < maxY; i++) {
-            yIterations++;
-            if (containerArray[i][variables.TP_X_Axis] != null) {
-//               break;
-                i = maxY;
-                yIterations--;
-            }
-        }
-
-        Xlength = xIterations;
-        Ylength = yIterations;
-    }
-//cjdvtcnbnm ldf vtnjlf
-    private boolean existCargoForFoundLength() {
-        //можно что нибудь всунуть в  расстояния до объектов по Хlenght и Уlenght от выбранной ТП
-        for (Cargo cargo : variables.cargoList) {
-            if (variables.TP_Y_Axis + Ylength <= variables.Yboard && variables.TP_Y_Axis + Ylength <= cargo.getLength()) {
-                if (variables.TP_X_Axis + Xlength <= variables.Xboard && variables.TP_X_Axis + Xlength <= cargo.getWidth()) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    private Cargo chosenCargo() {
-        //Из DB1 Выбираем груз:
-        //    *с пустым полем Container number;
-        //    *  с самой длинной стороной У
-
-
-        Cargo chosenCargo = new Cargo();
-        for (Cargo cargo : variables.cargoList) {
-            if (cargo.getContainerNumber() == null) {
-                if (cargo.getLength() > chosenCargo.getLength()) {
-                    chosenCargo = cargo;
-                }
-            }
-        }
-        return chosenCargo;
-    }
-
 }

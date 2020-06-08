@@ -5,8 +5,22 @@ import com.logisticproject.domain.Cargo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class AdditionalMethods {
+
+    public boolean existNotUsedCargo(List<Cargo> cargoList) {
+        for (Cargo cargo : cargoList) {
+            if (cargo.getContainerNumber() == null) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
 
 
     public void setKSTKwithMaximumAreaToTPMK() {
@@ -51,15 +65,6 @@ public class AdditionalMethods {
         //Yboard = TPMK Yvalue
         //...
         variables.setBoards(1, 1);//1 заменить на найденные значения
-    }
-
-    public boolean existNotUsedCargo() {
-        for (Cargo cargo : variables.cargoList) {
-            if (cargo.getContainerNumber() == null) {
-                return true;
-            }
-        }
-        return false;
     }
 
     private boolean repositoryKSTKcontainsNextPoint(int numberActualKSTK) {

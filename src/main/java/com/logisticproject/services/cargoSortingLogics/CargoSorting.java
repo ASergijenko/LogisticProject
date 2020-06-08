@@ -2,6 +2,7 @@ package com.logisticproject.services.cargoSortingLogics;
 
 import com.logisticproject.constants.TwentyFootContainer;
 import com.logisticproject.domain.Cargo;
+import com.logisticproject.domain.Point;
 import com.logisticproject.domain.Container;
 import com.logisticproject.services.ContainerCreationService;
 import com.logisticproject.services.FindTemporaryCoordinatesService;
@@ -9,6 +10,7 @@ import com.logisticproject.services.cargoSortingLogics.util.AdditionalMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,29 +31,37 @@ public class CargoSorting {
         boolean cargoRemained = true;
         boolean containerFinished = false;
         boolean leftAnyKSTK = true;
-        Map<Integer, Integer[][]> containerList = new HashMap<>();
 
+        int containerNumber = 0;
+
+        Map<Integer, Integer[][]> containerList = new HashMap<>();
+        List<Point> pointsRepository = new ArrayList<>();
+
+        //Сортировка грузов
         do {
-            //Сортировка грузов
-            if (additionalMethods.existNotUsedCargo()) {
+            if (additionalMethods.existNotUsedCargo(cargoList)) {
+
                 //Создание контейнера
-                Container container = new Container(TwentyFootContainer.LENGTH, TwentyFootContainer.WIDTH, variables.containerNumber++);
+                Container container = new Container(TwentyFootContainer.LENGTH, TwentyFootContainer.WIDTH, containerNumber++);
                 Integer[][] containerArray = containerCreationService.create(container.getContainerLength(), container.getContainerWidth());
                 containerList.put(container.getContainerNumber(), containerArray);
 
-                //     ConstructionPoint constructionPoint = new ConstructionPoint(1,1);
-               // variables.setTPMK(1, 1);
-               // variables.setTP(1,1);
-               // variables.setBoards(TwentyFootContainer.WIDTH, TwentyFootContainer.LENGTH);
+                Point TPNK_Point = new Point(1,1);
+                Point TP_Point = new Point(1,1);
+                pointsRepository.add(TP_Point);
+                Point boards = new Point(TwentyFootContainer.WIDTH, TwentyFootContainer.LENGTH);
+
+                //Заполнение контейнера
                 do {
-                    //Заполнение контейнера
-
-                    //>>>>>
                     //Алгоритм заполнения контейнера
-                    containerFillingAlgorithm.containerFilling(containerArray);
-                    //<<<<<
+                    containerFillingAlgorithm.containerFilling(cargoList, containerArray, pointsRepository, TP_Point, TPNK_Point, boards);
 
-                    //>>>>>
+
+
+
+
+
+
                     //Анализ container Fullness
                     if (true) {//true заменить на логику ДА
                         //<<<<<
@@ -60,8 +70,9 @@ public class CargoSorting {
                         //Находим КСТК с максимальной площ. из Репозитория КСТК
                         additionalMethods.setKSTKwithMaximumAreaToTPMK();
                         //<<<<<
+
+                        //Заполнение "карманов"
                         do{
-                            //Заполнение "карманов"
 
                             //>>>>>
                             //Берем первую точку КСТК из репозитория = Точка построения

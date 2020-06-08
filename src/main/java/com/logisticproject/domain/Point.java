@@ -2,19 +2,19 @@ package com.logisticproject.domain;
 
 import java.util.Objects;
 
-public class ConstructionPoint {
+public class Point {
     private Integer xValue;
     private Integer yValue;
 
-    public ConstructionPoint() {
+    public Point() {
     }
 
-    public ConstructionPoint(Integer xValue, Integer yValue) {
+    public Point(Integer xValue, Integer yValue) {
         this.xValue = xValue;
         this.yValue = yValue;
     }
 
-    public Integer getxValue() {
+    public Integer getValueX() {
         return xValue;
     }
 
@@ -22,7 +22,7 @@ public class ConstructionPoint {
         this.xValue = xValue;
     }
 
-    public Integer getyValue() {
+    public Integer getValueY() {
         return yValue;
     }
 
@@ -34,7 +34,7 @@ public class ConstructionPoint {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ConstructionPoint that = (ConstructionPoint) o;
+        Point that = (Point) o;
         return Objects.equals(xValue, that.xValue) &&
                 Objects.equals(yValue, that.yValue);
     }

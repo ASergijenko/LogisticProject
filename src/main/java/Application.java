@@ -12,7 +12,7 @@ public class Application {
             SortingMain main = applicationContext.getBean(SortingMain.class);
             main.execute();
         }catch (ValidationException e){
-            System.out.println("Smotri ctro pishesh" + e.getMessage());
+            System.out.println("Fatal error 404 " + e.getMessage());
         }
     }
 }
