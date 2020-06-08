@@ -1,4 +1,4 @@
-package com.logisticproject.services.cargoSortingLogics;
+package com.logisticproject.services.cargoSortingLogics.util;
 
 import com.logisticproject.constants.TwentyFootContainer;
 import com.logisticproject.domain.Cargo;
@@ -8,8 +8,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class AdditionalMethods {
 
-    @Autowired
-    private Variables variables;
 
     public void setKSTKwithMaximumAreaToTPMK() {
         //Находим КСТК с максимальной площ. из Репозитория КСТК

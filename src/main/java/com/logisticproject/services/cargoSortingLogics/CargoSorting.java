@@ -2,10 +2,10 @@ package com.logisticproject.services.cargoSortingLogics;
 
 import com.logisticproject.constants.TwentyFootContainer;
 import com.logisticproject.domain.Cargo;
-import com.logisticproject.domain.ConstructionPoint;
 import com.logisticproject.domain.Container;
 import com.logisticproject.services.ContainerCreationService;
 import com.logisticproject.services.FindTemporaryCoordinatesService;
+import com.logisticproject.services.cargoSortingLogics.util.AdditionalMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +17,6 @@ import java.util.Map;
 public class CargoSorting {
 
     @Autowired private ContainerCreationService containerCreationService;
-    @Autowired private Variables variables;
     @Autowired private ContainerFillingAlgorithm containerFillingAlgorithm;
     @Autowired private AdditionalMethods additionalMethods;
     @Autowired private FindTemporaryCoordinatesService findTemporaryCoordinatesService;
@@ -26,7 +25,7 @@ public class CargoSorting {
     //будет добавлена  логика
     //<<<<<
 
-    public Map<Integer, Integer[][]> cargoSortingProcess() {
+    public Map<Integer, Integer[][]> cargoSortingProcess(List<Cargo> cargoList) {
         boolean cargoRemained = true;
         boolean containerFinished = false;
         boolean leftAnyKSTK = true;
@@ -41,9 +40,9 @@ public class CargoSorting {
                 containerList.put(container.getContainerNumber(), containerArray);
 
                 //     ConstructionPoint constructionPoint = new ConstructionPoint(1,1);
-                variables.setTPMK(1, 1);
-                variables.setTP(1,1);
-                variables.setBoards(TwentyFootContainer.WIDTH, TwentyFootContainer.LENGTH);
+               // variables.setTPMK(1, 1);
+               // variables.setTP(1,1);
+               // variables.setBoards(TwentyFootContainer.WIDTH, TwentyFootContainer.LENGTH);
                 do {
                     //Заполнение контейнера
 
@@ -105,5 +104,4 @@ public class CargoSorting {
 
     return containerList;
     }
-
 }
