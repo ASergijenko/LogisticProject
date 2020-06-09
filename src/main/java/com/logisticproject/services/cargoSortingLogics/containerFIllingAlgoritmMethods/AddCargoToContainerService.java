@@ -1,4 +1,4 @@
-package com.logisticproject.services;
+package com.logisticproject.services.cargoSortingLogics.containerFIllingAlgoritmMethods;
 
 import com.logisticproject.domain.Cargo;
 import com.logisticproject.domain.Point;

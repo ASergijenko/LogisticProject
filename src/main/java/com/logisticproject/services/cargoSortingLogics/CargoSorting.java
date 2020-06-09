@@ -4,8 +4,11 @@ import com.logisticproject.constants.TwentyFootContainer;
 import com.logisticproject.domain.Cargo;
 import com.logisticproject.domain.Point;
 import com.logisticproject.domain.Container;
+import com.logisticproject.dto.CargoDTO;
 import com.logisticproject.services.ContainerCreationService;
-import com.logisticproject.services.FindTemporaryCoordinatesService;
+import com.logisticproject.services.FindMaxSquareKSTK;
+import com.logisticproject.services.cargoSortingLogics.cargoSortingMethods.ContainerFullnessCheck;
+import com.logisticproject.services.cargoSortingLogics.containerFIllingAlgoritmMethods.FindKSTKCoordinates;
 import com.logisticproject.services.cargoSortingLogics.util.AdditionalMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,7 +24,11 @@ public class CargoSorting {
     @Autowired private ContainerCreationService containerCreationService;
     @Autowired private ContainerFillingAlgorithm containerFillingAlgorithm;
     @Autowired private AdditionalMethods additionalMethods;
-    @Autowired private FindTemporaryCoordinatesService findTemporaryCoordinatesService;
+    @Autowired private FindKSTKCoordinates findKSTKCoordinates;
+    @Autowired private ContainerFullnessCheck containerFullnessCheck;
+    @Autowired private FindMaxSquareKSTK findMaxSquareKSTK;
+
+    public static Integer containerNumber = 0;
 
     //>>>>>
     //будет добавлена  логика
@@ -31,8 +38,6 @@ public class CargoSorting {
         boolean cargoRemained = true;
         boolean containerFinished = false;
         boolean leftAnyKSTK = true;
-
-        int containerNumber = 0;
 
         Map<Integer, Integer[][]> containerList = new HashMap<>();
         List<Point> pointsRepository = new ArrayList<>();
@@ -54,25 +59,25 @@ public class CargoSorting {
                 //Заполнение контейнера
                 do {
                     //Алгоритм заполнения контейнера
-                    containerFillingAlgorithm.containerFilling(cargoList, containerArray, pointsRepository, TP_Point, TPNK_Point, boards);
-
-
-
-
-
-
-
-                    //Анализ container Fullness
-                    if (true) {//true заменить на логику ДА
-                        //<<<<<
-
-                        //>>>>>
+                    CargoDTO cargoDTO = containerFillingAlgorithm.containerFilling(cargoList, containerList, pointsRepository, TP_Point, TPNK_Point, boards, containerNumber, container);
+                    cargoList = cargoDTO.getCargoList();
+                    containerList = cargoDTO.getContainerList();
+                    pointsRepository = cargoDTO.getPointRepository();
+                    container = cargoDTO.getContainer();
+                    if (containerFullnessCheck.isSuitableCargo(cargoList, container)) {
                         //Находим КСТК с максимальной площ. из Репозитория КСТК
-                        additionalMethods.setKSTKwithMaximumAreaToTPMK();
-                        //<<<<<
-
+                        TPNK_Point = findMaxSquareKSTK.find(pointsRepository);
                         //Заполнение "карманов"
                         do{
+
+
+
+
+
+
+
+
+
 
                             //>>>>>
                             //Берем первую точку КСТК из репозитория = Точка построения
@@ -106,12 +111,12 @@ public class CargoSorting {
                         containerFinished = true;
                     }
                 } while (!containerFinished);
-                System.out.println("Container '"+ variables.containerNumber + "' is filled;");
+           //     System.out.println("Container '"+ variables.containerNumber + "' is filled;");
             } else {
                 cargoRemained = false;
             }
         } while (cargoRemained);
-        System.out.println("Cargo position is calculated. You will need '" + variables.containerNumber + "' containers;");
+      //  System.out.println("Cargo position is calculated. You will need '" + variables.containerNumber + "' containers;");
 
     return containerList;
     }

@@ -5,11 +5,13 @@ public class Container {
     private Integer containerLength;
     private Integer containerWidth;
     private Integer containerNumber;
+    private Integer square;
 
     public Container(Integer containerLength, Integer containerWidth, Integer containerNumber) {
         this.containerLength = containerLength;
         this.containerWidth = containerWidth;
         this.containerNumber = containerNumber;
+        this.square = containerLength * containerWidth;
     }
 
     public Integer getContainerLength() {
@@ -36,6 +38,14 @@ public class Container {
         this.containerNumber = containerNumber;
     }
 
+    public Integer getSquare() {
+        return square;
+    }
+
+    public void setSquare(Integer square) {
+        this.square = square;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -47,7 +57,9 @@ public class Container {
             return false;
         if (containerWidth != null ? !containerWidth.equals(container.containerWidth) : container.containerWidth != null)
             return false;
-        return containerNumber != null ? containerNumber.equals(container.containerNumber) : container.containerNumber == null;
+        if (containerNumber != null ? !containerNumber.equals(container.containerNumber) : container.containerNumber != null)
+            return false;
+        return square != null ? square.equals(container.square) : container.square == null;
     }
 
     @Override
@@ -55,6 +67,7 @@ public class Container {
         int result = containerLength != null ? containerLength.hashCode() : 0;
         result = 31 * result + (containerWidth != null ? containerWidth.hashCode() : 0);
         result = 31 * result + (containerNumber != null ? containerNumber.hashCode() : 0);
+        result = 31 * result + (square != null ? square.hashCode() : 0);
         return result;
     }
 
@@ -64,6 +77,7 @@ public class Container {
                 "containerLength=" + containerLength +
                 ", containerWidth=" + containerWidth +
                 ", containerNumber=" + containerNumber +
+                ", square=" + square +
                 '}';
     }
 }

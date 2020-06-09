@@ -1,7 +1,11 @@
 package com.logisticproject.services.cargoSortingLogics;
 
 import com.logisticproject.domain.Cargo;
+import com.logisticproject.domain.Container;
 import com.logisticproject.domain.Point;
+import com.logisticproject.dto.CargoDTO;
+import com.logisticproject.services.cargoSortingLogics.containerFIllingAlgoritmMethods.FindKSTKCoordinates;
+import com.logisticproject.services.cargoSortingLogics.containerFIllingAlgoritmMethods.AddCargoToContainerService;
 import com.logisticproject.services.cargoSortingLogics.containerFIllingAlgoritmMethods.CargoChoosingService;
 import com.logisticproject.services.cargoSortingLogics.containerFIllingAlgoritmMethods.LengthCalculator;
 import com.logisticproject.services.cargoSortingLogics.containerFIllingAlgoritmMethods.RemovePointFromRepository;
@@ -10,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class ContainerFillingAlgorithm {
@@ -22,13 +27,17 @@ public class ContainerFillingAlgorithm {
     LengthCalculator lengthCalculator;
     @Autowired
     CargoChoosingService cargoChoosingService;
+    @Autowired
+    AddCargoToContainerService addCargoToContainerService;
+    @Autowired
+    FindKSTKCoordinates findKSTKCoordinates;
 
-    public void containerFilling(List<Cargo> cargoList, Integer[][] containerArray, List<Point> pointRepository, Point TP_Point, Point TPNK_Point, Point boards) {
-
+    public CargoDTO containerFilling(List<Cargo> cargoList, Map<Integer, Integer[][]> containerList, List<Point> pointRepository, Point TP_Point, Point TPNK_Point, Point boards, Integer containerNumber, Container container) {
+        Integer[][] containerArray = containerList.get(containerNumber);
         //Алгоритм заполнения контейнера
         boolean newCargoCanBeInsert = true;
         do {
-            TP_Point = tp_pointCalculation.calcTpPoint(pointRepository, TP_Point, TPNK_Point);
+            TP_Point = tp_pointCalculation.calcTpPoint(pointRepository, TP_Point);
             pointRepository = removePointFromRepository.removePointFromRepository(TP_Point, pointRepository);
             Point length = lengthCalculator.calculateLength(containerArray, TPNK_Point, TP_Point, boards);
             Cargo selectedCargo = cargoChoosingService.chooseCargo(cargoList, TP_Point, length, boards);
@@ -39,30 +48,26 @@ public class ContainerFillingAlgorithm {
                     selectedCargo.setWidth(selectedCargo.getLength());
                     selectedCargo.setLength(width);
                 }
-
-
-
-
-
-                //>>>>>
                 //Устанавливанем груз в точку построения
-                //<<<<<
-                selectedCargo.setContainerNumber(variables.containerNumber);
-                //>>>>>
+                addCargoToContainerService.addToContainer(TP_Point, containerArray, selectedCargo);
+                selectedCargo.setContainerNumber(containerNumber);
+                container.setSquare(container.getSquare() - selectedCargo.getSquare());
+
                 //Нахождение двух точек КСТК
-                //<<<<<
-
-                // >>>>>
-                //Перезапись точки построения
-                //Т.П.== выбранная КСТК, что ближе к точке постоения прошлой фигуры
-                //<<<<<
-
+                List<Point> points_KSTK = findKSTKCoordinates.findTemporaryCoordinates(TP_Point, selectedCargo);
+                pointRepository.add(points_KSTK.get(0));
+                pointRepository.add(points_KSTK.get(1));
             } else {
                 newCargoCanBeInsert = false;
             }
-            //>>>>>
-            //удаление выбранной КСТК из репозитория
-            //<<<<<
         } while (newCargoCanBeInsert);
+
+        CargoDTO cargoDTO = new CargoDTO();
+        cargoDTO.setCargoList(cargoList);
+        containerList.put(containerNumber, containerArray);
+        cargoDTO.setContainerList(containerList);
+        cargoDTO.setPointRepository(pointRepository);
+        cargoDTO.setContainer(container);
+        return cargoDTO;
     }
 }

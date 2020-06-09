@@ -12,11 +12,12 @@ public class Cargo {
     private Integer quantity;
     private Integer totalWeight;
     private String comments;
+    private Integer square;
 
     public Cargo() {
     }
 
-    public Cargo(int cargoId, int containerNumber, int length, int width, int height, int weight, boolean isStackable, int quantity, int totalWeight, String comments) {
+    public Cargo(Integer cargoId, Integer containerNumber, Integer length, Integer width, Integer height, Integer weight, boolean isStackable, Integer quantity, Integer totalWeight, String comments) {
         this.cargoId = cargoId;
         this.containerNumber = containerNumber;
         this.length = length;
@@ -27,12 +28,7 @@ public class Cargo {
         this.quantity = quantity;
         this.totalWeight = totalWeight;
         this.comments = comments;
-    }
-
-    public Cargo(int cargoId, int length, int width) {
-        this.cargoId = cargoId;
-        this.length = length;
-        this.width = width;
+        this.square = length * width;
     }
 
     public Integer getCargoId() {
@@ -115,6 +111,14 @@ public class Cargo {
         this.comments = comments;
     }
 
+    public Integer getSquare() {
+        return square;
+    }
+
+    public void setSquare(Integer square) {
+        this.square = square;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -122,30 +126,33 @@ public class Cargo {
 
         Cargo cargo = (Cargo) o;
 
-        if (cargoId != cargo.cargoId) return false;
-        if (containerNumber != cargo.containerNumber) return false;
-        if (length != cargo.length) return false;
-        if (width != cargo.width) return false;
-        if (height != cargo.height) return false;
-        if (weight != cargo.weight) return false;
         if (isStackable != cargo.isStackable) return false;
-        if (quantity != cargo.quantity) return false;
-        if (totalWeight != cargo.totalWeight) return false;
-        return comments != null ? comments.equals(cargo.comments) : cargo.comments == null;
+        if (cargoId != null ? !cargoId.equals(cargo.cargoId) : cargo.cargoId != null) return false;
+        if (containerNumber != null ? !containerNumber.equals(cargo.containerNumber) : cargo.containerNumber != null)
+            return false;
+        if (length != null ? !length.equals(cargo.length) : cargo.length != null) return false;
+        if (width != null ? !width.equals(cargo.width) : cargo.width != null) return false;
+        if (height != null ? !height.equals(cargo.height) : cargo.height != null) return false;
+        if (weight != null ? !weight.equals(cargo.weight) : cargo.weight != null) return false;
+        if (quantity != null ? !quantity.equals(cargo.quantity) : cargo.quantity != null) return false;
+        if (totalWeight != null ? !totalWeight.equals(cargo.totalWeight) : cargo.totalWeight != null) return false;
+        if (comments != null ? !comments.equals(cargo.comments) : cargo.comments != null) return false;
+        return square != null ? square.equals(cargo.square) : cargo.square == null;
     }
 
     @Override
     public int hashCode() {
-        int result = cargoId;
-        result = 31 * result + containerNumber;
-        result = 31 * result + length;
-        result = 31 * result + width;
-        result = 31 * result + height;
-        result = 31 * result + weight;
+        int result = cargoId != null ? cargoId.hashCode() : 0;
+        result = 31 * result + (containerNumber != null ? containerNumber.hashCode() : 0);
+        result = 31 * result + (length != null ? length.hashCode() : 0);
+        result = 31 * result + (width != null ? width.hashCode() : 0);
+        result = 31 * result + (height != null ? height.hashCode() : 0);
+        result = 31 * result + (weight != null ? weight.hashCode() : 0);
         result = 31 * result + (isStackable ? 1 : 0);
-        result = 31 * result + quantity;
-        result = 31 * result + totalWeight;
+        result = 31 * result + (quantity != null ? quantity.hashCode() : 0);
+        result = 31 * result + (totalWeight != null ? totalWeight.hashCode() : 0);
         result = 31 * result + (comments != null ? comments.hashCode() : 0);
+        result = 31 * result + (square != null ? square.hashCode() : 0);
         return result;
     }
 
@@ -162,9 +169,7 @@ public class Cargo {
                 ", quantity=" + quantity +
                 ", totalWeight=" + totalWeight +
                 ", comments='" + comments + '\'' +
+                ", square=" + square +
                 '}';
     }
-
-
-
 }

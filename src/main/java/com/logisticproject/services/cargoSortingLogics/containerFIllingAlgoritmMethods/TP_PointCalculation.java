@@ -8,15 +8,16 @@ import java.util.List;
 @Component
 public class TP_PointCalculation {
 
-    public Point calcTpPoint(List<Point> pointRepository, Point TP_Point, Point TPNK_Point) {
+    public Point calcTpPoint(List<Point> pointRepository, Point TP_Point) {
+        //Точка построение = точка из репозитория КСТК с ближайщими кардинатами к ТПМК
         Point result = TP_Point;
-        int sumOfTPNK = TPNK_Point.getValueX() + TPNK_Point.getValueY();
+        int sumOfTP = TP_Point.getValueX() + TP_Point.getValueY();
         int temp = 100000;
 
         for (Point point : pointRepository) {
             int sumOfPoint = point.getValueX() + point.getValueY();
-            if (sumOfPoint - sumOfTPNK < temp){
-                temp = sumOfPoint - sumOfTPNK;
+            if (sumOfPoint - sumOfTP < temp) {
+                temp = sumOfPoint - sumOfTP;
                 result = point;
             }
         }

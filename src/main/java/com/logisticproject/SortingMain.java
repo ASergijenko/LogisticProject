@@ -1,6 +1,7 @@
 package com.logisticproject;
 
 import com.logisticproject.domain.Cargo;
+import com.logisticproject.services.ContainerToConsoleViewService;
 import com.logisticproject.services.cargoSortingLogics.CargoSorting;
 import com.logisticproject.services.excelService.ExcelReadingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ public class SortingMain {
     private ExcelReadingService reader;
     @Autowired
     private CargoSorting cargoSorting;
+    @Autowired
+    private ContainerToConsoleViewService containerToConsoleViewService;
 
     public void execute() throws Exception {
 
@@ -27,6 +30,7 @@ public class SortingMain {
         Map<Integer, Integer[][]> result = cargoSorting.cargoSortingProcess(cargoList);
 
         //vivod infi iz peremennih
+        containerToConsoleViewService.printToConsole(result.get(0));
         //...okay
     }
 
