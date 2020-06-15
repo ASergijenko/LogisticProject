@@ -86,6 +86,9 @@ public class ExcelReadingService {
                         break;
                 }
             }
+            //fiks
+            cargo.setSquare(cargo.getLength() * cargo.getWidth());
+
             cargoValidationService.validate(cargo);
             cargoList.add(cargo);
         }

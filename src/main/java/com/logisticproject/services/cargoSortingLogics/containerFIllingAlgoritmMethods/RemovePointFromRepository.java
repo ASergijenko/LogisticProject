@@ -7,7 +7,7 @@ import java.util.List;
 
 @Component
 public class RemovePointFromRepository {
-    public List<Point> removePointFromRepository(Point TP_point, List<Point> repository) {
+    public List<Point> remove(Point TP_point, List<Point> repository) {
         repository.removeIf(point -> point.equals(TP_point));
         return repository;
     }

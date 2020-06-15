@@ -10,9 +10,9 @@ import java.util.List;
 public class ContainerFullnessCheck {
 
     public boolean isSuitableCargo(List<Cargo> cargoList, Container container) {
-        for (int i = cargoList.size(); i > 0; i--) {
-            if (container.getSquare() >= cargoList.get(i).getSquare()) {
-                if (cargoList.get(i) != null) {
+        for (int i = cargoList.size(); i >= 0; i--) {
+            if (container.getSquare() > cargoList.get(i - 1).getSquare()) {  //fiks -1
+                if (cargoList.get(i - 1) != null) {
                     return true;
                 }
             }

@@ -26,11 +26,23 @@ public class SortingMain {
         String excelFilePath = "C:/Users/aserg/Desktop/Logistics/Table.xlsx";
         List<Cargo> cargoList = reader.read(excelFilePath);
 
+                        System.out.println("read completed");
+
         //logika sortirovki
         Map<Integer, Integer[][]> result = cargoSorting.cargoSortingProcess(cargoList);
 
+                        System.out.println("logic started");
+
         //vivod infi iz peremennih
+
+                        System.out.println("result printing");
+
         containerToConsoleViewService.printToConsole(result.get(0));
+        result.forEach((key, value) -> {
+            System.out.println(key);
+            containerToConsoleViewService.printToConsole(value);
+        });
+
         //...okay
     }
 
