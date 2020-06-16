@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class existsNotUsedCargo {
+public class ExistsNotUsedCargo {
 
     public boolean check(List<Cargo> cargoList) {
         for (Cargo cargo : cargoList) {

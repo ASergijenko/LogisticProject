@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 public class AddCargoToContainerService {
 
     public Integer[][] addToContainer(Point point, Integer[][] array, Cargo cargo) {
-
         Integer cargoLength = cargo.getLength();
         Integer cargoWidth = cargo.getWidth();
         Integer cargoNumber = cargo.getCargoId();

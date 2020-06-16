@@ -13,7 +13,7 @@ import com.logisticproject.services.cargoSortingLogics.containerFIllingAlgoritmM
 import com.logisticproject.services.cargoSortingLogics.containerFIllingAlgoritmMethods.RemovePointFromRepository;
 import com.logisticproject.services.cargoSortingLogics.pocketFillingMethods.DesignationSmallContainerBorders;
 import com.logisticproject.services.cargoSortingLogics.pocketFillingMethods.FindTPPointFromKSTK;
-import com.logisticproject.services.cargoSortingLogics.cargoSortingMethods.existsNotUsedCargo;
+import com.logisticproject.services.cargoSortingLogics.cargoSortingMethods.ExistsNotUsedCargo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -30,7 +30,7 @@ public class CargoSorting {
     @Autowired
     private ContainerFillingAlgorithm containerFillingAlgorithm;
     @Autowired
-    private existsNotUsedCargo existsNotUsedCargo;
+    private ExistsNotUsedCargo existsNotUsedCargo;
     @Autowired
     private FindKSTKCoordinates findKSTKCoordinates;
     @Autowired
