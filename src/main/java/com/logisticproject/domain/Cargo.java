@@ -28,7 +28,6 @@ public class Cargo {
         this.quantity = quantity;
         this.totalWeight = totalWeight;
         this.comments = comments;
-        this.square = length * width;
     }
 
     public Integer getCargoId() {
@@ -115,9 +114,13 @@ public class Cargo {
         return square;
     }
 
-    public void setSquare() {
-        this.square = length * width;
+    public void setSquare(Integer square) {
+        this.square = square;
     }
+
+/*    public void setSquare() {
+        this.square = length * width;
+    }*/
 
     @Override
     public boolean equals(Object o) {

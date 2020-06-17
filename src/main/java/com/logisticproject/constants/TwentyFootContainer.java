@@ -2,9 +2,9 @@ package com.logisticproject.constants;
 
 public class TwentyFootContainer {
 
-    public static final int LENGTH = 590;
+    public static final int LENGTH = 150;//590;
 
-    public static final int WIDTH = 235;
+    public static final int WIDTH = 100;//235;
 
     public static final int HEIGHT = 238;
 

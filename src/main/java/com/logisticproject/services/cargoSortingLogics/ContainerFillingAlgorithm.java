@@ -56,7 +56,7 @@ public class ContainerFillingAlgorithm {
                 //Устанавливанем груз в точку построения
                 System.out.println("Устанавливанем груз в точку построения");
 
-                addCargoToContainerService.addToContainer(TP_Point, containerArray, selectedCargo);
+                containerArray = addCargoToContainerService.addToContainer(TP_Point, containerArray, selectedCargo);
                 selectedCargo.setContainerNumber(containerNumber);
                 container.setSquare(container.getSquare() - selectedCargo.getSquare());
 

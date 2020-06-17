@@ -131,8 +131,6 @@ public class CargoSorting {
                         //нахождение границ следующего большого контейнера
                         System.out.println("нахождение границ следующего большого контейнера");
 
-                        //test
-                        containerToConsoleViewService.printToConsole(containerArray);
 
                         boards.setxValue(TPNK_Point.getValueX());
                         boards.setyValue(TPNK_Point.getValueY());
