@@ -114,13 +114,13 @@ public class Cargo {
         return square;
     }
 
-    public void setSquare(Integer square) {
-        this.square = square;
-    }
+//    public void setSquare(Integer square) {
+//        this.square = square;
+//    }
 
-/*    public void setSquare() {
+    public void setSquare() {
         this.square = length * width;
-    }*/
+    }
 
     @Override
     public boolean equals(Object o) {
