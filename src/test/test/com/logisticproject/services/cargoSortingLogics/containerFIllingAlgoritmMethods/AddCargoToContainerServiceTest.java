@@ -19,15 +19,6 @@ public class AddCargoToContainerServiceTest {
 
         victim.addToContainer(point, array, cargo());
 
-/*        //Визуализация результата для каких либо нужд
-        for (int i = 0; i < array.length; i++) {
-            for (int j = 0; j < array[0].length; j++) {
-                System.out.printf("%5d ", array[i][j]);
-            }
-            System.out.println();
-        }*/
-//        array[5][4] = null; //Авто.проверка возвращает false
-
         assertTrue(checkOfFilledZone(point,array));
     }
 
@@ -49,4 +40,12 @@ public class AddCargoToContainerServiceTest {
         cargo.setWidth(5);
         return cargo;
     }
+
+    /*        //Визуализация результата для каких либо нужд
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[0].length; j++) {
+                System.out.printf("%5d ", array[i][j]);
+            }
+            System.out.println();
+        }*/
 }

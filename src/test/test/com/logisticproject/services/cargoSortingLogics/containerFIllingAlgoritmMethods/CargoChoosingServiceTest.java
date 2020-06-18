@@ -36,7 +36,7 @@ public class CargoChoosingServiceTest {
     }
 
     @Test
-    public void chooseCargoFalseBoards() {
+    public void chooseCargoNullBoards() {
         Point TP_Point = new Point(1,1);
         Point length = new Point(1,1);
         Point boards = new Point(1,1);

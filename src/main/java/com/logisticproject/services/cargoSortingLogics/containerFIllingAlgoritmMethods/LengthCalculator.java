@@ -14,7 +14,7 @@ public class LengthCalculator {
         int maxX = TPNK_Point.getValueX() + boards.getValueX();
         int maxY = TPNK_Point.getValueY() + boards.getValueY();
 
-        for (int i = 0; i < maxX; i++) {
+        for (int i = TP_Point.getValueX(); i < maxX; i++) {
             xIterations++;
             if (containerArray[TP_Point.getValueY()][i] != null) {
                 i = maxX;
@@ -22,7 +22,7 @@ public class LengthCalculator {
             }
         }
 
-        for (int i = 0; i < maxY; i++) {
+        for (int i = TP_Point.getValueY(); i < maxY; i++) {
             yIterations++;
             if (containerArray[i][TP_Point.getValueX()] != null) {
                 i = maxY;

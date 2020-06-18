@@ -2,18 +2,18 @@ package com.logisticproject.services.cargoSortingLogics;
 
 import com.logisticproject.constants.TwentyFootContainer;
 import com.logisticproject.domain.Cargo;
-import com.logisticproject.domain.Point;
 import com.logisticproject.domain.Container;
+import com.logisticproject.domain.Point;
 import com.logisticproject.dto.CargoDTO;
 import com.logisticproject.services.ContainerCreationService;
 import com.logisticproject.services.ContainerToConsoleViewService;
 import com.logisticproject.services.FindMaxSquareKSTK;
 import com.logisticproject.services.cargoSortingLogics.cargoSortingMethods.ContainerFullnessCheck;
+import com.logisticproject.services.cargoSortingLogics.cargoSortingMethods.ExistsNotUsedCargo;
 import com.logisticproject.services.cargoSortingLogics.containerFIllingAlgoritmMethods.FindKSTKCoordinates;
 import com.logisticproject.services.cargoSortingLogics.containerFIllingAlgoritmMethods.RemovePointFromRepository;
 import com.logisticproject.services.cargoSortingLogics.pocketFillingMethods.DesignationSmallContainerBorders;
 import com.logisticproject.services.cargoSortingLogics.pocketFillingMethods.FindTPPointFromKSTK;
-import com.logisticproject.services.cargoSortingLogics.cargoSortingMethods.ExistsNotUsedCargo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -94,12 +94,17 @@ public class CargoSorting {
 
                         TPNK_Point = findMaxSquareKSTK.find(pointsRepository);
                         pointsRepository = removePointFromRepository.remove(TPNK_Point, pointsRepository);
+
                         //Заполнение "карманов"
                         System.out.println("Заполнение карманов");
 
-                        do {
+//                        do {
+                        //Еще осталичсь КСТК?
+                        System.out.println("Еще осталичсь КСТК?");
+                        while (!pointsRepository.isEmpty()) {
                             System.out.println("Берем первую y => 0 точку КСТК из репозитория = Точка построения");
                             //Берем первую y => 0 точку КСТК из репозитория = Точка построения
+
                             Point TPNK_2_Point = findTPPointFromKSTK.find(pointsRepository);
                             pointsRepository = removePointFromRepository.remove(TPNK_2_Point, pointsRepository);
                             List<Point> pointsRepository2 = new ArrayList<>();
@@ -119,16 +124,14 @@ public class CargoSorting {
                             cargoList = cargoDTO.getCargoList();
                             containerList = cargoDTO.getContainerList();
 
-                            //Еще осталичсь КСТК?
-                            System.out.println("Еще осталичсь КСТК?");
-                            /////////////////ВОТ ТУТ УХОДИТ В БЕСКОНЕЧНЫЙ ЦИКЛ
+                            /////////////////ВОТ ТУТ ranshe УХОДИТ В БЕСКОНЕЧНЫЙ ЦИКЛ
+//                            if (pointsRepository.isEmpty()) {
+//                                leftAnyKSTK = false;
+//                            }
+//                        } while (leftAnyKSTK);
+                        }
 
-                            if (pointsRepository.isEmpty()) {
-                                leftAnyKSTK = false;
-                            }
-                        } while (leftAnyKSTK);
-
-                        //нахождение границ следующего большого контейнера
+                        //нахождение границ следующего большого контейнера///????????
                         System.out.println("нахождение границ следующего большого контейнера");
 
 

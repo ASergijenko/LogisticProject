@@ -14,6 +14,7 @@ public class FindKSTKCoordinates {
         List<Point> points = new ArrayList<>();
         Point pointInX = new Point(TP_point.getValueX() + createdCargo.getWidth(), TP_point.getValueY());
         Point pointInY = new Point(TP_point.getValueX(), TP_point.getValueY() + createdCargo.getLength());
+        //а надо ли нам это?
         if (pointInX.getValueX() - TP_point.getValueX() < pointInY.getValueY() - TP_point.getValueY()) {
             points.add(0, pointInX);
             points.add(1, pointInY);

@@ -9,6 +9,7 @@ import java.util.List;
 @Component
 public class FindTPPointFromKSTK {
 //fiks
+//надо подумать над обьявлением значения точки result
 
     public Point find(List<Point> points) {
         Point result = new Point(TwentyFootContainer.WIDTH, TwentyFootContainer.LENGTH);
