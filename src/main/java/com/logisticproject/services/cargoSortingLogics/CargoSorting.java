@@ -114,7 +114,9 @@ public class CargoSorting {
 
                             System.out.println("обозначение границ малого кармана");
 
-                            boards = designationSmallContainerBorders.designateBorders(pointsRepository2, TPNK_Point, TPNK_2_Point, boards);
+//                            boards = designationSmallContainerBorders.designateBorders(pointsRepository2, TPNK_Point, TPNK_2_Point, boards);
+                            //Fix
+                            boards = designationSmallContainerBorders.designateBorders(pointsRepository2, TPNK_Point, TPNK_2_Point);
 
                             //Алгоритм заполнения контейнера
                             System.out.println("Алгоритм заполнения контейнера");

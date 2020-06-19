@@ -5,7 +5,6 @@ import com.logisticproject.domain.Point;
 import com.logisticproject.services.ContainerCreationService;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -18,14 +17,14 @@ public class FindKSTKCoordinatesTest {
 
     @Test
     public void findTemporaryCoordinatesCorrect() {
-        Point TP_point = new Point(2,2);
+        Point TP_point = new Point(2, 2);
         Integer[][] array = containerCreationService.create(12, 10);
         addCargoToContainerService.addToContainer(TP_point, array, cargo());
 
         List<Point> points = victim.findTemporaryCoordinates(TP_point, cargo());
 
-        assertEquals(new Point(7,2), points.get(0));
-        assertEquals(new Point(2,10), points.get(1));
+        assertEquals(new Point(7, 2), points.get(0));
+        assertEquals(new Point(2, 10), points.get(1));
         assertEquals(2, points.size());
 
 /*        //Визуализация результата для каких либо нужд
