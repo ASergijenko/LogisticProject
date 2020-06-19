@@ -38,6 +38,7 @@ public class ContainerFullnessCheckTest {
         cargo.setLength(10);
         cargo.setWidth(5);
         cargo.setSquare();
+//        cargo.setSquare(10 * 5);
         return cargo;
     }
 
@@ -46,6 +47,7 @@ public class ContainerFullnessCheckTest {
         cargo.setLength(11);
         cargo.setWidth(6);
         cargo.setSquare();
+//        cargo.setSquare(11 * 6);
         return cargo;
     }
 }

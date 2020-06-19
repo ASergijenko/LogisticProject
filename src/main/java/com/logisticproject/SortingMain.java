@@ -23,7 +23,9 @@ public class SortingMain {
     public void execute() throws Exception {
 
         //scitivanie iz excel
-        String excelFilePath = "C:/Users/Grigorijs Skulteckis/Google Drive/Данные/Логистический вопрос/SampleData/Table.xlsx";
+//        String excelFilePath = "C:/Users/Grigorijs Skulteckis/Google Drive/Данные/Логистический вопрос/SampleData/Table.xlsx";
+        String excelFilePath = "D:/Google Диск/Данные/Логистический вопрос/SampleData/Table.xlsx";
+
         List<Cargo> cargoList = reader.read(excelFilePath);
 
                         System.out.println("read completed");
