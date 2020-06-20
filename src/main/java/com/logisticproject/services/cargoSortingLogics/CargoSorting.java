@@ -69,7 +69,7 @@ public class CargoSorting {
                 Point boards = new Point(TwentyFootContainer.WIDTH, TwentyFootContainer.LENGTH);
 
                 //Заполнение контейнера
-                System.out.println("filling started");
+                System.out.println("Filling started");//test
                 do {
                     //Алгоритм заполнения контейнера
                     CargoDTO cargoDTO = containerFillingAlgorithm.containerFilling(cargoList, containerList, pointsRepository, TP_Point, TPNK_Point, boards, containerNumber, container);
@@ -82,19 +82,22 @@ public class CargoSorting {
                         TPNK_Point = findMaxSquareKSTK.find(pointsRepository);
                         pointsRepository = removePointFromRepository.remove(TPNK_Point, pointsRepository);
 
-                        //Заполнение "карманов"
-                        System.out.println("Заполнение карманов");
-                        System.out.println("Ŗepository points number " + pointsRepository.size());
-                        /*int i = 0;
+                        System.out.println("Ŗepository points number " + pointsRepository.size());//test
+                        /*
+                        //test
+                        int i = 0;
                         for (Cargo cargo : cargoList) {
                             if(cargo.getContainerNumber() == null){
                                 i++;
                         }}
-                        System.out.println("Čargo numrers" + i);*/
+                        System.out.println("Čargo numrers" + i);
+                        //test
+                        */
 
-                        //Еще осталичсь КСТК?
+                        //Заполнение "карманов"
                         while (!pointsRepository.isEmpty()) {
-                            //Берем первую y => 0 точку КСТК из репозитория = Точка построения
+                            System.out.println("Заполнение карманов");//test
+                            //Берем первую y => 0 точку КСТК из репозитория = Точка построения _2
                             Point TPNK_2_Point = findTPPointFromKSTK.find(pointsRepository);
                             pointsRepository = removePointFromRepository.remove(TPNK_2_Point, pointsRepository);
                             List<Point> pointsRepository2 = new ArrayList<>();
@@ -102,11 +105,11 @@ public class CargoSorting {
 
                             //обозначение границ малого "кармана"
                             boards = designationSmallContainerBorders.designateBorders(pointsRepository2, TPNK_Point, TPNK_2_Point);
-
                             //Алгоритм заполнения контейнера
                             cargoDTO = containerFillingAlgorithm.containerFilling(cargoList, containerList, pointsRepository2, TP_Point, TPNK_2_Point, boards, containerNumber, container);
                             cargoList = cargoDTO.getCargoList();
                             containerList = cargoDTO.getContainerList();
+                            container = cargoDTO.getContainer();//Fix
                         }
                         //нахождение границ следующего большого контейнера
                         boards.setxValue(TPNK_Point.getValueX());
@@ -115,9 +118,10 @@ public class CargoSorting {
                     } else {
                         containerFinished = true;
                     }
+//                    System.out.println(containerFinished);
                 } while (!containerFinished);
                 System.out.println("Container '" + containerNumber + "' is filled;");
-//                break;//test
+                break;//test
             } else {
                 cargoRemained = false;
             }

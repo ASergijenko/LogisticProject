@@ -44,12 +44,14 @@ public class ContainerFillingAlgorithm {
             Cargo selectedCargo = cargoChoosingService.chooseCargo(cargoList, length);
             if (selectedCargo != null) {
                 if (selectedCargo.getLength() <= length.getValueX() * 0.90) {
+                    System.out.println("А ты вообще импользуешся???");
                     //меняем значения сторон cargo (Х и У)
                     int width = selectedCargo.getWidth();
                     selectedCargo.setWidth(selectedCargo.getLength());
                     selectedCargo.setLength(width);
                 }
                 //Устанавливанем груз в точку построения
+                System.out.println("Заполнение контейнера"); // test
                 containerArray = addCargoToContainerService.addToContainer(TP_Point, containerArray, selectedCargo);
                 selectedCargo.setContainerNumber(containerNumber);
                 container.setSquare(container.getSquare() - selectedCargo.getSquare());
