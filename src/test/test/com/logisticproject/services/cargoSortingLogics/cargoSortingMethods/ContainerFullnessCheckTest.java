@@ -1,3 +1,4 @@
+/*
 package com.logisticproject.services.cargoSortingLogics.cargoSortingMethods;
 
 import com.logisticproject.domain.Cargo;
@@ -50,4 +51,4 @@ public class ContainerFullnessCheckTest {
 //        cargo.setSquare(11 * 6);
         return cargo;
     }
-}
+}*/

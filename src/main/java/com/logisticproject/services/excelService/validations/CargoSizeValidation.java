@@ -12,12 +12,23 @@ public class CargoSizeValidation implements ValidationRule<Cargo> {
     @Override
     public void validate(Cargo newCargo) {
         List<String> errorLogs = new ArrayList<>();
-        if (newCargo.getLength() >= TwentyFootContainer.LENGTH) {
-            errorLogs.add(ErrorMessages.CARGO_LENGTH);
+
+        if (newCargo.getLength() >= newCargo.getWidth()) {
+            if (newCargo.getLength() >= TwentyFootContainer.LENGTH) {
+                errorLogs.add(ErrorMessages.CARGO_LENGTH);
+            }
+            if (newCargo.getWidth() >= TwentyFootContainer.WIDTH) {
+                errorLogs.add(ErrorMessages.CARGO_WIDTH);
+            }
+        } else {
+            if (newCargo.getLength() > TwentyFootContainer.WIDTH) {
+                errorLogs.add(ErrorMessages.CARGO_LENGTH);
+            }
+            if (newCargo.getWidth() > TwentyFootContainer.LENGTH) {
+                errorLogs.add(ErrorMessages.CARGO_WIDTH);
+            }
         }
-        if (newCargo.getWidth() >= TwentyFootContainer.WIDTH) {
-            errorLogs.add(ErrorMessages.CARGO_WIDTH);
-        }
+
         if (!errorLogs.isEmpty()) {
             throw new ValidationException(errorLogs.toString());
         }

@@ -34,35 +34,27 @@ public class ContainerFillingAlgorithm {
 
     public CargoDTO containerFilling(List<Cargo> cargoList, Map<Integer, Integer[][]> containerList, List<Point> pointRepository, Point TP_Point, Point TPNK_Point, Point boards, Integer containerNumber, Container container) {
         Integer[][] containerArray = containerList.get(containerNumber - 1);          //  Integer[][] containerArray = containerList.get(containerNumber);
-        //Алгоритм заполнения контейнера
-        System.out.println("Алгоритм заполнения контейнера");
 
+        //Алгоритм заполнения контейнера
         boolean newCargoCanBeInsert = true;
         do {
             TP_Point = tp_pointCalculation.calcTpPoint(pointRepository, TP_Point);
             pointRepository = removePointFromRepository.remove(TP_Point, pointRepository);
             Point length = lengthCalculator.calculateLength(containerArray, TPNK_Point, TP_Point, boards);
-            Cargo selectedCargo = cargoChoosingService.chooseCargo(cargoList, TP_Point, length, boards);
+            Cargo selectedCargo = cargoChoosingService.chooseCargo(cargoList, length);
             if (selectedCargo != null) {
                 if (selectedCargo.getLength() <= length.getValueX() * 0.90) {
                     //меняем значения сторон cargo (Х и У)
-                    System.out.println("меняем значения сторон cargo (Х и У)");
-
-
                     int width = selectedCargo.getWidth();
                     selectedCargo.setWidth(selectedCargo.getLength());
                     selectedCargo.setLength(width);
                 }
                 //Устанавливанем груз в точку построения
-                System.out.println("Устанавливанем груз в точку построения");
-
                 containerArray = addCargoToContainerService.addToContainer(TP_Point, containerArray, selectedCargo);
                 selectedCargo.setContainerNumber(containerNumber);
                 container.setSquare(container.getSquare() - selectedCargo.getSquare());
 
                 //Нахождение двух точек КСТК
-                System.out.println("Нахождение двух точек КСТК");
-
                 List<Point> points_KSTK = findKSTKCoordinates.findTemporaryCoordinates(TP_Point, selectedCargo);
                 pointRepository.add(points_KSTK.get(0));
                 pointRepository.add(points_KSTK.get(1));
@@ -73,7 +65,7 @@ public class ContainerFillingAlgorithm {
 
         CargoDTO cargoDTO = new CargoDTO();
         cargoDTO.setCargoList(cargoList);
-        containerList.put(containerNumber, containerArray);
+        containerList.put(containerNumber - 1, containerArray);
         cargoDTO.setContainerList(containerList);
         cargoDTO.setPointRepository(pointRepository);
         cargoDTO.setContainer(container);

@@ -52,17 +52,14 @@ public class CargoSorting {
     public Map<Integer, Integer[][]> cargoSortingProcess(List<Cargo> cargoList) {
         boolean cargoRemained = true;
         boolean containerFinished = false;
-        boolean leftAnyKSTK = true;
-
+        //       boolean leftAnyKSTK = true;
         Map<Integer, Integer[][]> containerList = new HashMap<>();
         List<Point> pointsRepository = new ArrayList<>();
 
         //Сортировка грузов
-        System.out.println("sorting started");
-
+//        System.out.println("sorting started");
         do {
             if (existsNotUsedCargo.check(cargoList)) {
-
                 //Создание контейнера
                 Container container = new Container(TwentyFootContainer.LENGTH, TwentyFootContainer.WIDTH, containerNumber++);
                 Integer[][] containerArray = containerCreationService.create(container.getContainerLength(), container.getContainerWidth());
@@ -75,32 +72,31 @@ public class CargoSorting {
 
                 //Заполнение контейнера
                 System.out.println("filling started");
-
-
                 do {
                     //Алгоритм заполнения контейнера
-                    System.out.println("filling algorithm started");
-
-
+//                    System.out.println("filling algorithm started");
                     CargoDTO cargoDTO = containerFillingAlgorithm.containerFilling(cargoList, containerList, pointsRepository, TP_Point, TPNK_Point, boards, containerNumber, container);
                     cargoList = cargoDTO.getCargoList();
                     containerList = cargoDTO.getContainerList();
                     pointsRepository = cargoDTO.getPointRepository();
                     container = cargoDTO.getContainer();
-                    if (containerFullnessCheck.isSuitableCargo(cargoList, container)) {
+                    if (containerFullnessCheck.isSuitableCargo(cargoList, container, pointsRepository)) {
                         //Находим КСТК с максимальной площ. из Репозитория КСТК
-                        System.out.println("Находим КСТК с максимальной площ. из Репозитория КСТК");
-
-
+             //           System.out.println("Находим КСТК с максимальной площ. из Репозитория КСТК");
                         TPNK_Point = findMaxSquareKSTK.find(pointsRepository);
                         pointsRepository = removePointFromRepository.remove(TPNK_Point, pointsRepository);
 
                         //Заполнение "карманов"
                         System.out.println("Заполнение карманов");
+                        System.out.println("Ŗepository points number " + pointsRepository.size());
+                        int i = 0;
+                        for (Cargo cargo : cargoList) {
+                            if(cargo.getContainerNumber() == null){
+                                i++;
+                        }}
+                        System.out.println("Čargo numrers" + i);
 
-//                        do {
                         //Еще осталичсь КСТК?
-                        System.out.println("Еще осталичсь КСТК?");
                         while (!pointsRepository.isEmpty()) {
                             System.out.println("Берем первую y => 0 точку КСТК из репозитория = Точка построения");
                             //Берем первую y => 0 точку КСТК из репозитория = Точка построения
@@ -111,32 +107,17 @@ public class CargoSorting {
                             pointsRepository2.add(TPNK_2_Point);
 
                             //обозначение границ малого "кармана"
-
-                            System.out.println("обозначение границ малого кармана");
-
-//                            boards = designationSmallContainerBorders.designateBorders(pointsRepository2, TPNK_Point, TPNK_2_Point, boards);
-                            //Fix
+                //            System.out.println("обозначение границ малого кармана");
                             boards = designationSmallContainerBorders.designateBorders(pointsRepository2, TPNK_Point, TPNK_2_Point);
 
                             //Алгоритм заполнения контейнера
-                            System.out.println("Алгоритм заполнения контейнера");
-
-
+           //                 System.out.println("Алгоритм заполнения контейнера");
                             cargoDTO = containerFillingAlgorithm.containerFilling(cargoList, containerList, pointsRepository2, TP_Point, TPNK_2_Point, boards, containerNumber, container);
                             cargoList = cargoDTO.getCargoList();
                             containerList = cargoDTO.getContainerList();
-
-                            /////////////////ВОТ ТУТ ranshe УХОДИТ В БЕСКОНЕЧНЫЙ ЦИКЛ
-//                            if (pointsRepository.isEmpty()) {
-//                                leftAnyKSTK = false;
-//                            }
-//                        } while (leftAnyKSTK);
                         }
-
                         //нахождение границ следующего большого контейнера///????????
-                        System.out.println("нахождение границ следующего большого контейнера");
-
-
+         //               System.out.println("нахождение границ следующего большого контейнера");
                         boards.setxValue(TPNK_Point.getValueX());
                         boards.setyValue(TPNK_Point.getValueY());
                         pointsRepository.add(TPNK_Point);
