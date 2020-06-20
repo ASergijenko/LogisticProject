@@ -1,4 +1,4 @@
-package com.logisticproject.services;
+package com.logisticproject.services.cargoSortingLogics.cargoSortingMethods;
 
 import com.logisticproject.constants.TwentyFootContainer;
 import com.logisticproject.domain.Point;
@@ -10,7 +10,7 @@ import java.util.List;
 
 @Component
 public class FindMaxSquareKSTK {
-    //fiks
+
     public Point find(List<Point> points) {
         Point result = new Point(0,0);
         for (Point point : points) {

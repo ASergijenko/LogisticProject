@@ -8,9 +8,8 @@ import java.util.List;
 
 @Component
 public class FindTPPointFromKSTK {
-//fiks
 //надо подумать над обьявлением значения точки result
-
+//?некорректно заполняет контейнера кода много больших грузов и пару мелких (мелкие раскидывает по контейнерам)?
     public Point find(List<Point> points) {
         Point result = new Point(TwentyFootContainer.WIDTH, TwentyFootContainer.LENGTH);
         for (Point point : points) {

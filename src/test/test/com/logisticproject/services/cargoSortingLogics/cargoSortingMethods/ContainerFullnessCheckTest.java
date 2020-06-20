@@ -1,8 +1,8 @@
-/*
 package com.logisticproject.services.cargoSortingLogics.cargoSortingMethods;
 
 import com.logisticproject.domain.Cargo;
 import com.logisticproject.domain.Container;
+import com.logisticproject.domain.Point;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -18,20 +18,34 @@ public class ContainerFullnessCheckTest {
     @Test
     public void isSuitableCargoTrue() {
         Container container = new Container(10, 5, 1);
+        List<Point> pointList = new ArrayList<>();
+        pointList.add(new Point(1, 1));
         List<Cargo> cargoList = new ArrayList<>();
         cargoList.add(cargoGood());
         cargoList.add(cargoBad());
 
-        assertTrue(victim.isSuitableCargo(cargoList, container));
+        assertTrue(victim.isSuitableCargo(cargoList, container, pointList));
     }
 
     @Test
     public void isSuitableCargoFalse() {
         Container container = new Container(10, 5, 1);
+        List<Point> pointList = new ArrayList<>();
+        pointList.add(new Point(1, 1));
         List<Cargo> cargoList = new ArrayList<>();
         cargoList.add(cargoBad());
 
-        assertFalse(victim.isSuitableCargo(cargoList, container));
+        assertFalse(victim.isSuitableCargo(cargoList, container, pointList));
+    }
+
+    @Test
+    public void isSuitableCargoPointListEmpty() {
+        Container container = new Container(10, 5, 1);
+        List<Point> pointList = new ArrayList<>();
+        List<Cargo> cargoList = new ArrayList<>();
+        cargoList.add(cargoBad());
+
+        assertFalse(victim.isSuitableCargo(cargoList, container, pointList));
     }
 
     private Cargo cargoGood() {
@@ -51,4 +65,4 @@ public class ContainerFullnessCheckTest {
 //        cargo.setSquare(11 * 6);
         return cargo;
     }
-}*/
+}

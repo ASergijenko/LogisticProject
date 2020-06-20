@@ -9,12 +9,10 @@ import java.util.List;
 @Component
 public class DesignationSmallContainerBorders {
 
-    //    public Point designateBorders(List<Point> points, Point TPMK_point, Point TPMK_2_point, Point boards) {
     public Point designateBorders(List<Point> points, Point TPMK_point, Point TPMK_2_point) {
         Point boards = new Point();
         int nextKSTK_Y_Axis = 0;
 
-        //Fix
         // проверка есть ли след. точку KSTK в репозитории
         for (Point point : points) {
             if (TPMK_2_point.getValueY() < point.getValueY()) {

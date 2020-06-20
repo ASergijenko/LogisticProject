@@ -2,7 +2,7 @@ package com.logisticproject.services.cargoSortingLogics.containerFIllingAlgoritm
 
 import com.logisticproject.domain.Cargo;
 import com.logisticproject.domain.Point;
-import com.logisticproject.services.ContainerCreationService;
+import com.logisticproject.services.cargoSortingLogics.cargoSortingMethods.ContainerCreationService;
 import org.junit.Test;
 
 import java.util.List;

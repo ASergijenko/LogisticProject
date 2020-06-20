@@ -1,4 +1,4 @@
-package com.logisticproject.services;
+package com.logisticproject.services.cargoSortingLogics.cargoSortingMethods;
 
 import org.springframework.stereotype.Component;
 

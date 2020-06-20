@@ -1,4 +1,4 @@
-package com.logisticproject.services.comporators;
+package com.logisticproject.services.w_developing;
 
 import com.logisticproject.domain.Point;
 import org.springframework.stereotype.Component;

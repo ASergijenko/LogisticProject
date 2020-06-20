@@ -1,4 +1,4 @@
-package com.logisticproject.services;
+package com.logisticproject.services.excelService;
 
 import com.logisticproject.domain.Cargo;
 import org.springframework.stereotype.Component;

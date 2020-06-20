@@ -1,7 +1,7 @@
 package com.logisticproject;
 
 import com.logisticproject.domain.Cargo;
-import com.logisticproject.services.ContainerToConsoleViewService;
+import com.logisticproject.services.excelService.ContainerToConsoleViewService;
 import com.logisticproject.services.cargoSortingLogics.CargoSorting;
 import com.logisticproject.services.excelService.ExcelReadingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,15 +21,15 @@ public class SortingMain {
     private ContainerToConsoleViewService containerToConsoleViewService;
 
     public void execute() throws Exception {
-        //scitivanie iz excel
-//        String excelFilePath = "C:/Users/Grigorijs Skulteckis/Google Drive/Данные/Логистический вопрос/SampleData/Table.xlsx";
-        String excelFilePath = "C:/Users/aserg/Desktop/Logistics/Table.xlsx";
+        //Считывание из excel
+        String excelFilePath = "C:/Users/Grigorijs Skulteckis/Google Drive/Данные/Логистический вопрос/SampleData/Table_mnogo.xlsx";
+//        String excelFilePath = "C:/Users/aserg/Desktop/Logistics/Table.xlsx";
         List<Cargo> cargoList = reader.read(excelFilePath);
 
-        //logika sortirovki
+        //Основаная логика сортировки
         Map<Integer, Integer[][]> result = cargoSorting.cargoSortingProcess(cargoList);
 
-        //vivod infi iz peremennih
+        //Вывод данных
         result.forEach((key, value) -> {
             System.out.println("Container number: " + (key + 1));
             containerToConsoleViewService.printToConsole(value);
