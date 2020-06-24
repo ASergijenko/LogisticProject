@@ -16,10 +16,11 @@ public class DesignationSmallContainerBorders {
         // проверка есть ли след. точку KSTK в репозитории
         for (Point point : points) {
             if (TPMK_2_point.getValueY() < point.getValueY()) {
-                nextKSTK_Y_Axis = point.getValueY();
-                break;//нормально ли?
+                nextKSTK_Y_Axis = point.getValueY() ;
+                break;
             } else {
-                nextKSTK_Y_Axis = TwentyFootContainer.LENGTH;
+                //new //+1 - коррекция рассчета границ при получении длинны контейнера
+                nextKSTK_Y_Axis = TwentyFootContainer.LENGTH + 1;
             }
         }
 

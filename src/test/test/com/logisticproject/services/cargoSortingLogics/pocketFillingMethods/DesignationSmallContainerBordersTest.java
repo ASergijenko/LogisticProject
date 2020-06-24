@@ -74,6 +74,6 @@ public class DesignationSmallContainerBordersTest {
         List<Point> pointList = new ArrayList<>();
         pointList.add(new Point(15, 50));
 
-        assertEquals(new Point(20, TwentyFootContainer.LENGTH - 60), victim.designateBorders(pointList, TPMK_point, TPMK_2_point));
+        assertEquals(new Point(20, (TwentyFootContainer.LENGTH + 1) - 60), victim.designateBorders(pointList, TPMK_point, TPMK_2_point));
     }
 }

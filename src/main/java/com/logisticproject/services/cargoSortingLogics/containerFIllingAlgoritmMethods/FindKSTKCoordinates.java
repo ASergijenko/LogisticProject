@@ -1,5 +1,6 @@
 package com.logisticproject.services.cargoSortingLogics.containerFIllingAlgoritmMethods;
 
+import com.logisticproject.constants.TwentyFootContainer;
 import com.logisticproject.domain.Cargo;
 import com.logisticproject.domain.Point;
 import org.springframework.stereotype.Component;
@@ -14,13 +15,15 @@ public class FindKSTKCoordinates {
         List<Point> points = new ArrayList<>();
         Point pointInX = new Point(TP_point.getValueX() + createdCargo.getWidth(), TP_point.getValueY());
         Point pointInY = new Point(TP_point.getValueX(), TP_point.getValueY() + createdCargo.getLength());
-        //а надо ли нам это?
-        if (pointInX.getValueX() - TP_point.getValueX() < pointInY.getValueY() - TP_point.getValueY()) {
-            points.add(0, pointInX);
-            points.add(1, pointInY);
-        } else {
-            points.add(0, pointInY);
-            points.add(1, pointInX);
+        points.add(pointInX);
+        points.add(pointInY);
+
+        //ограничения на точки что пересекают границы контейнера
+        for (int i = 0; i < points.size(); i++){
+            Point point = points.get(i);
+            if(point.getValueY() > TwentyFootContainer.LENGTH || point.getValueX() > TwentyFootContainer.WIDTH){
+                points.remove(point);
+            }
         }
         return points;
     }

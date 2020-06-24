@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class TP_PointCalculationTest {
 
@@ -19,7 +19,7 @@ public class TP_PointCalculationTest {
         pointList.add(new Point(1,2));
         pointList.add(new Point(5,5));
 
-        assertEquals(new Point(1,2), victim.calcTpPoint(pointList,TP_point));
+        assertEquals(new Point(1, 2), victim.calcTpPoint(pointList, TP_point, new Point(1, 1)));
     }
 
     @Test
@@ -29,6 +29,6 @@ public class TP_PointCalculationTest {
         pointList.add(new Point(3,2));
         pointList.add(new Point(5,5));
 
-        assertEquals(new Point(3,2), victim.calcTpPoint(pointList,TP_point));
+        assertEquals(new Point(3, 2), victim.calcTpPoint(pointList, TP_point, new Point(1, 1)));
     }
 }

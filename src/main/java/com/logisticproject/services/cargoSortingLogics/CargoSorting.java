@@ -72,6 +72,7 @@ public class CargoSorting {
                 System.out.println("Filling started");//test
                 do {
                     //Алгоритм заполнения контейнера
+                    System.out.println("Алгоритм заполнения контейнера #1");//test
                     CargoDTO cargoDTO = containerFillingAlgorithm.containerFilling(cargoList, containerList, pointsRepository, TP_Point, TPNK_Point, boards, containerNumber, container);
                     cargoList = cargoDTO.getCargoList();
                     containerList = cargoDTO.getContainerList();
@@ -81,22 +82,12 @@ public class CargoSorting {
                         //Находим КСТК с максимальной площ. из Репозитория КСТК
                         TPNK_Point = findMaxSquareKSTK.find(pointsRepository);
                         pointsRepository = removePointFromRepository.remove(TPNK_Point, pointsRepository);
-
-                        System.out.println("Ŗepository points number " + pointsRepository.size());//test
-                        /*
-                        //test
-                        int i = 0;
-                        for (Cargo cargo : cargoList) {
-                            if(cargo.getContainerNumber() == null){
-                                i++;
-                        }}
-                        System.out.println("Čargo numrers" + i);
-                        //test
-                        */
+                        System.out.println("TPNK " + TPNK_Point);//test
 
                         //Заполнение "карманов"
                         while (!pointsRepository.isEmpty()) {
                             System.out.println("Заполнение карманов");//test
+                            System.out.println("Repository points карманов " + pointsRepository);//test
                             //Берем первую y => 0 точку КСТК из репозитория = Точка построения _2
                             Point TPNK_2_Point = findTPPointFromKSTK.find(pointsRepository);
                             pointsRepository = removePointFromRepository.remove(TPNK_2_Point, pointsRepository);
@@ -105,7 +96,9 @@ public class CargoSorting {
 
                             //обозначение границ малого "кармана"
                             boards = designationSmallContainerBorders.designateBorders(pointsRepository2, TPNK_Point, TPNK_2_Point);
+//                            System.out.println("-Границы построения - " + boards + " from " + TPNK_2_Point);//test
                             //Алгоритм заполнения контейнера
+                            System.out.println("Алгоритм заполнения контейнера #2");//test
                             cargoDTO = containerFillingAlgorithm.containerFilling(cargoList, containerList, pointsRepository2, TP_Point, TPNK_2_Point, boards, containerNumber, container);
                             cargoList = cargoDTO.getCargoList();
                             containerList = cargoDTO.getContainerList();
@@ -118,7 +111,8 @@ public class CargoSorting {
                     } else {
                         containerFinished = true;
                     }
-//                    System.out.println(containerFinished);
+//                    System.out.println(containerFinished);//test
+                    System.out.println();//test
                 } while (!containerFinished);
                 System.out.println("Container '" + containerNumber + "' is filled;");
                 break;//test
