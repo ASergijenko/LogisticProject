@@ -34,6 +34,7 @@ public class SortingMain {
         result.forEach((key, value) -> {
             System.out.println("Container number: " + (key + 1));
             containerToConsoleViewService.printToConsole(value);
+            System.out.println();
         });
     }
 }

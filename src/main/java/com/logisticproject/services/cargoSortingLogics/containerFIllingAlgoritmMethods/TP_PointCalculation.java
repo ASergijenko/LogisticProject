@@ -4,6 +4,7 @@ import com.logisticproject.domain.Point;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Objects;
 
 @Component
 public class TP_PointCalculation {
@@ -20,8 +21,8 @@ public class TP_PointCalculation {
                 temp = sumOfPoint - sumOfTP;
                 result = point;
             }
-            //new - если квадрат то надо выбрать на одной оси с первой точкой TPNK
-            else if (sumOfPoint == (result.getValueY() + result.getValueX())) {
+            //если квадрат то надо выбрать на одной оси с первой точкой TPNK
+            else if (sumOfPoint == (Objects.requireNonNull(result).getValueY() + result.getValueX())) {
                 if (TPNK_Point.getValueX().equals(point.getValueX()) || TPNK_Point.getValueY().equals(point.getValueY())) {
                     result = point;
                 }

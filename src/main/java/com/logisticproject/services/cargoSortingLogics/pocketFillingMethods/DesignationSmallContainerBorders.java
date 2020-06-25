@@ -19,7 +19,7 @@ public class DesignationSmallContainerBorders {
                 nextKSTK_Y_Axis = point.getValueY() ;
                 break;
             } else {
-                //new //+1 - коррекция рассчета границ при получении длинны контейнера
+                //+1 - коррекция рассчета границ при получении длинны контейнера
                 nextKSTK_Y_Axis = TwentyFootContainer.LENGTH + 1;
             }
         }

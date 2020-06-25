@@ -19,9 +19,9 @@ public class FindKSTKCoordinates {
         points.add(pointInY);
 
         //ограничения на точки что пересекают границы контейнера
-        for (int i = 0; i < points.size(); i++){
-            Point point = points.get(i);
-            if(point.getValueY() > TwentyFootContainer.LENGTH || point.getValueX() > TwentyFootContainer.WIDTH){
+        for (int i = points.size(); i > 0; i--) {
+            Point point = points.get(i - 1);
+            if (point.getValueY() > TwentyFootContainer.LENGTH || point.getValueX() > TwentyFootContainer.WIDTH) {
                 points.remove(point);
             }
         }
