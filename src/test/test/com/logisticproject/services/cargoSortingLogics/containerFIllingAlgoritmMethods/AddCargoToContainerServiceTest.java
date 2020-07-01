@@ -15,14 +15,14 @@ public class AddCargoToContainerServiceTest {
     @Test
     public void addToContainer() {
         Point point = new Point(2, 2);
-        Integer[][] array = containerCreationService.create(10, 10);
+        Double[][] array = containerCreationService.create(10, 10);
 
         victim.addToContainer(point, array, cargo());
 
         assertTrue(checkOfFilledZone(point,array));
     }
 
-    private boolean checkOfFilledZone(Point point, Integer[][] array) {
+    private boolean checkOfFilledZone(Point point, Double[][] array) {
         for (Integer i = point.getValueY(); i < point.getValueY() + cargo().getLength(); i++) {
             for (Integer j = point.getValueX(); j < point.getValueX() + cargo().getWidth(); j++) {
                 if (array[i][j] == null) {
@@ -35,7 +35,7 @@ public class AddCargoToContainerServiceTest {
 
     private Cargo cargo() {
         Cargo cargo = new Cargo();
-        cargo.setCargoId(1);
+        cargo.setCargoId((double)1);
         cargo.setLength(8);
         cargo.setWidth(5);
         return cargo;
