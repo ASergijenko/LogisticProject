@@ -18,7 +18,7 @@ public class LengthCalculatorTest {
         Point TP_point = new Point(7, 2);
         Point TPNK_point = new Point(2, 2);
         Point boards = new Point(12, 12);
-        Integer[][] array = containerCreationService.create(12, 10);
+        Double[][] array = containerCreationService.create(12, 10);
 
         assertEquals(new Point(4, 11), victim.calculateLength(array, TPNK_point, TP_point, boards));
     }
@@ -28,7 +28,7 @@ public class LengthCalculatorTest {
         Point TP_point = new Point(7, 2);
         Point TPNK_point = new Point(2, 2);
         Point boards = new Point(8, 9);
-        Integer[][] array = containerCreationService.create(12, 10);
+        Double[][] array = containerCreationService.create(12, 10);
 
         assertEquals(new Point(3, 9), victim.calculateLength(array, TPNK_point, TP_point, boards));
     }
@@ -38,7 +38,7 @@ public class LengthCalculatorTest {
         Point TP_point = new Point(1, 1);
         Point TPNK_point = new Point(1, 1);
         Point boards = new Point(12, 12);
-        Integer[][] array = containerCreationService.create(12, 10);
+        Double[][] array = containerCreationService.create(12, 10);
         addCargoToContainerService.addToContainer(new Point(3, 1), array, cargo());
 
         assertEquals(new Point(2, 12), victim.calculateLength(array, TPNK_point, TP_point, boards));
@@ -47,7 +47,7 @@ public class LengthCalculatorTest {
 
     private Cargo cargo() {
         Cargo cargo = new Cargo();
-        cargo.setCargoId(1);
+        cargo.setCargoId((double)1);
         cargo.setLength(8);
         cargo.setWidth(5);
         return cargo;

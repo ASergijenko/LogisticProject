@@ -7,10 +7,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class AddCargoToContainerService {
 
-    public Integer[][] addToContainer(Point point, Integer[][] array, Cargo cargo) {
+    public Double[][] addToContainer(Point point, Double[][] array, Cargo cargo) {
         Integer cargoLength = cargo.getLength();
         Integer cargoWidth = cargo.getWidth();
-        Integer cargoNumber = cargo.getCargoId();
+        Double cargoNumber = cargo.getCargoId();
 
         for(Integer i = point.getValueY(); i < point.getValueY() + cargoLength; i++) {
             for(Integer j = point.getValueX(); j < point.getValueX() + cargoWidth; j++) {
@@ -20,4 +20,3 @@ public class AddCargoToContainerService {
         return array;
     }
 }
-

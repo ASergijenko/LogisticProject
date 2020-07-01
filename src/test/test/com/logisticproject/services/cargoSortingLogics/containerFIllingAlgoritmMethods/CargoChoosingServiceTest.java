@@ -53,7 +53,7 @@ public class CargoChoosingServiceTest {
 
     private Cargo cargo() {
         Cargo cargo = new Cargo();
-        cargo.setCargoId(1);
+        cargo.setCargoId((double)1);
         cargo.setLength(8);
         cargo.setWidth(5);
         return cargo;

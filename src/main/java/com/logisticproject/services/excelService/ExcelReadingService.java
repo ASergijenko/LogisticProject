@@ -43,6 +43,10 @@ public class ExcelReadingService {
         return (int)(double)o;
     }
 
+    private double doubleCellValue(Object o) {
+        return (double)o;
+    }
+
     public List<Cargo> read(String excelFilePath) throws Exception {
         List<Cargo> cargoList = new ArrayList<>();
         FileInputStream inputStream = new FileInputStream(new File(excelFilePath));
@@ -65,7 +69,7 @@ public class ExcelReadingService {
 
                 switch (columnIndex) {
                     case 0:
-                        cargo.setCargoId(integerCellValue(getCellValue(nextCell)));
+                        cargo.setCargoId(doubleCellValue(getCellValue(nextCell)));
                         break;
                     case 1:
                         cargo.setLength(integerCellValue(getCellValue(nextCell)));
@@ -93,7 +97,21 @@ public class ExcelReadingService {
             cargo.setSquare();
             cargoValidationService.validate(cargo);
             cargoList.add(cargo);
+
+            if (cargo.getQuantity() > 1) {
+                int quantity = cargo.getQuantity();
+                cargo.setQuantity(1);
+                double id = cargo.getCargoId() + 0.01;
+                for (int i = 1; i < quantity; i++) {
+                    Cargo copiedCargo = cargo.clone();
+                    double rounded = Math.round(id * 100.0)/100.0;
+                    copiedCargo.setCargoId(rounded);
+                    cargoList.add(copiedCargo);
+                    id += 0.01;
+                }
+            }
         }
+
         cargoList = listSortingService.sort(cargoList);
         
         workbook.close();
