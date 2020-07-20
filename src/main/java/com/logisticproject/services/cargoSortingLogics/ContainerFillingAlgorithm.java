@@ -40,18 +40,19 @@ public class ContainerFillingAlgorithm {
             if (selectedCargo != null) {
 /*                if (selectedCargo.getLength() <= length.getValueX() * 0.90) {
                     //сли груз можно развернуть -> меняем значения сторон cargo (Х и У)
-                    System.out.println("А ты вообще импользуешся???");//test
+//                    System.out.println("---переворот - груз № " + selectedCargo.getCargoId());//test
                     int width = selectedCargo.getWidth();
                     selectedCargo.setWidth(selectedCargo.getLength());
                     selectedCargo.setLength(width);
                 }*/
                 //Устанавливанем груз в точку построения
                 containerArray = addCargoToContainerService.addToContainer(TP_Point, containerArray, selectedCargo);
+                System.out.println("-Помещен груз № " + selectedCargo.getCargoId());
                 selectedCargo.setContainerNumber(containerNumber);
                 container.setSquare(container.getSquare() - selectedCargo.getSquare());
 
                 //Нахождение двух точек КСТК
-                List<Point> points_KSTK = findKSTKCoordinates.findTemporaryCoordinates(TP_Point, selectedCargo);
+                List<Point> points_KSTK = findKSTKCoordinates.findTemporaryCoordinates(TP_Point, TPNK_Point, selectedCargo, length);
                 pointRepository.addAll(points_KSTK);
             } else {
                 newCargoCanBeInsert = false;

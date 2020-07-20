@@ -79,7 +79,9 @@ public class CargoSorting {
                     if (containerFullnessCheck.isSuitableCargo(cargoList, container, pointsRepository)) {
                         //Находим КСТК с максимальной площ. из Репозитория КСТК
                         TPNK_Point = findMaxSquareKSTK.find(pointsRepository);
+                        System.out.println("TPNK point " + TPNK_Point);//test
                         pointsRepository = removePointFromRepository.remove(TPNK_Point, pointsRepository);
+//                        System.out.println("point reposit  " + pointsRepository);//test
 
                         //Заполнение "карманов"
                         while (!pointsRepository.isEmpty()) {

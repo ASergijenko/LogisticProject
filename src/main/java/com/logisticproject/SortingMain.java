@@ -23,7 +23,7 @@ public class SortingMain {
     public void execute() throws Exception {
         //Считывание из excel
 //        String excelFilePath = "C:/Users/Grigorijs Skulteckis/Google Drive/Данные/Логистический вопрос/SampleData/Table_mnogo.xlsx";
-        String excelFilePath = "D:/Google Диск/Данные/Логистический вопрос/SampleData/Table_mnogo.xlsx";
+        String excelFilePath = "D:/Google Диск/Данные/Логистический вопрос/SampleData/Table_5.xlsx";
 //        String excelFilePath = "C:/Users/aserg/Desktop/Logistics/Table.xlsx";
         List<Cargo> cargoList = reader.read(excelFilePath);
 

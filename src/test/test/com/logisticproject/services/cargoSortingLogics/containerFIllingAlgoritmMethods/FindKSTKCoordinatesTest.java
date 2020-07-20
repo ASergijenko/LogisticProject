@@ -1,3 +1,4 @@
+/*
 package com.logisticproject.services.cargoSortingLogics.containerFIllingAlgoritmMethods;
 
 import com.logisticproject.constants.TwentyFootContainer;
@@ -70,7 +71,8 @@ public class FindKSTKCoordinatesTest {
         return cargo;
     }
 
-    /*        //Визуализация результата для каких либо нужд
+    */
+/*        //Визуализация результата для каких либо нужд
         System.out.println(points.toString());
         array[2][7] = 5;
         array[10][2] = 5;
@@ -79,5 +81,6 @@ public class FindKSTKCoordinatesTest {
                 System.out.printf("%5d ", array[i][j]);
             }
             System.out.println();
-        }*/
-}
+        }*//*
+
+}*/
