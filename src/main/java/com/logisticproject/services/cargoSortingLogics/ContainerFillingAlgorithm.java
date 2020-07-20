@@ -27,8 +27,9 @@ public class ContainerFillingAlgorithm {
     @Autowired
     FindKSTKCoordinates findKSTKCoordinates;
 
-    public CargoDTO containerFilling(List<Cargo> cargoList, Map<Integer, Integer[][]> containerList, List<Point> pointRepository, Point TP_Point, Point TPNK_Point, Point boards, Integer containerNumber, Container container) {
-        Integer[][] containerArray = containerList.get(containerNumber - 1);
+
+    public CargoDTO containerFilling(List<Cargo> cargoList, Map<Integer, Double[][]> containerList, List<Point> pointRepository, Point TP_Point, Point TPNK_Point, Point boards, Integer containerNumber, Container container) {
+        Double[][] containerArray = containerList.get(containerNumber - 1);          //  Integer[][] containerArray = containerList.get(containerNumber);
 
         //Алгоритм заполнения контейнера
         boolean newCargoCanBeInsert = true;

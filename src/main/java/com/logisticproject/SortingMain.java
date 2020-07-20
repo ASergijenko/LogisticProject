@@ -22,13 +22,21 @@ public class SortingMain {
 
     public void execute() throws Exception {
         //Считывание из excel
+
 //        String excelFilePath = "C:/Users/Grigorijs Skulteckis/Google Drive/Данные/Логистический вопрос/SampleData/Table_mnogo.xlsx";
-        String excelFilePath = "D:/Google Диск/Данные/Логистический вопрос/SampleData/Table_8fig.xlsx";
+//        String excelFilePath = "D:/Google Диск/Данные/Логистический вопрос/SampleData/Table_8fig.xlsx";
+
+        String excelFilePath = "C:/Users/aserg/Desktop/Logistics/multi.xlsx";
+
 //        String excelFilePath = "C:/Users/aserg/Desktop/Logistics/Table.xlsx";
         List<Cargo> cargoList = reader.read(excelFilePath);
 
+        for (Cargo cargo : cargoList) {
+            System.out.println(cargo.toString());
+        }
+
         //Основаная логика сортировки
-        Map<Integer, Integer[][]> result = cargoSorting.cargoSortingProcess(cargoList);
+        Map<Integer, Double[][]> result = cargoSorting.cargoSortingProcess(cargoList);
 
         //Вывод данных
         result.forEach((key, value) -> {

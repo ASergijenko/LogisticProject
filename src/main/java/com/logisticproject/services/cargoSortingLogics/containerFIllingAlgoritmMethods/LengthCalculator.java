@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class LengthCalculator {
 
-    public Point calculateLength(Integer[][] containerArray, Point TPNK_Point, Point TP_Point, Point boards) {
+    public Point calculateLength(Double[][] containerArray, Point TPNK_Point, Point TP_Point, Point boards) {
         //Нахождение растояния по X и Y до препятствия от точки построения, не больше Xboard и  Yboard от ТПМК
         int xIterations = 0;
         int yIterations = 0;

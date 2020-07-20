@@ -49,10 +49,10 @@ public class CargoSorting {
 
     public Integer containerNumber = 0;
 
-    public Map<Integer, Integer[][]> cargoSortingProcess(List<Cargo> cargoList) {
+    public Map<Integer, Double[][]> cargoSortingProcess(List<Cargo> cargoList) {
         boolean cargoRemained = true;
         boolean containerFinished = false;
-        Map<Integer, Integer[][]> containerList = new HashMap<>();
+        Map<Integer, Double[][]> containerList = new HashMap<>();
         List<Point> pointsRepository = new ArrayList<>();
 
         //Сортировка грузов
@@ -60,7 +60,7 @@ public class CargoSorting {
             if (existsNotUsedCargo.check(cargoList)) {
                 //Создание контейнера
                 Container container = new Container(TwentyFootContainer.LENGTH, TwentyFootContainer.WIDTH, containerNumber++);
-                Integer[][] containerArray = containerCreationService.create(container.getContainerLength(), container.getContainerWidth());
+                Double[][] containerArray = containerCreationService.create(container.getContainerLength(), container.getContainerWidth());
                 containerList.put(container.getContainerNumber(), containerArray);
 
                 Point TPNK_Point = new Point(1, 1);

@@ -177,9 +177,9 @@ public class Cargo {
 
 package com.logisticproject.domain;
 
-public class Cargo {
+public class Cargo implements Cloneable{
 
-    private Integer cargoId;
+    private Double cargoId;
     private Integer containerNumber;
     private Integer length;
     private Integer width;
@@ -194,7 +194,7 @@ public class Cargo {
     public Cargo() {
     }
 
-    public Cargo(Integer cargoId, Integer containerNumber, Integer length, Integer width, Integer height, Integer weight, boolean isStackable, Integer quantity, Integer totalWeight, String comments) {
+    public Cargo(Double cargoId, Integer containerNumber, Integer length, Integer width, Integer height, Integer weight, boolean isStackable, Integer quantity, Integer totalWeight, String comments, Integer square) {
         this.cargoId = cargoId;
         this.containerNumber = containerNumber;
         this.length = length;
@@ -205,15 +205,19 @@ public class Cargo {
         this.quantity = quantity;
         this.totalWeight = totalWeight;
         this.comments = comments;
-//        this.square = length * width;
+        this.square = square;
     }
 
-    public Integer getCargoId() {
+    public Double getCargoId() {
         return cargoId;
     }
 
-    public void setCargoId(Integer cargoId) {
+    public void setCargoId(Double cargoId) {
         this.cargoId = cargoId;
+    }
+
+    public void setSquare(Integer square) {
+        this.square = square;
     }
 
     public Integer getContainerNumber() {
@@ -352,5 +356,10 @@ public class Cargo {
                 ", comments='" + comments + '\'' +
                 ", square=" + square +
                 '}';
+    }
+
+    @Override
+    public Cargo clone() throws CloneNotSupportedException {
+        return (Cargo) super.clone();
     }
 }

@@ -10,7 +10,7 @@ import java.util.Map;
 public class CargoDTO {
 
     private List<Cargo> cargoList;
-    private Map<Integer, Integer[][]> containerList;
+    private Map<Integer, Double[][]> containerList;
     private List<Point> pointRepository;
     private Point TP_Point;
     private Point TPNK_Point;
@@ -34,11 +34,11 @@ public class CargoDTO {
         this.cargoList = cargoList;
     }
 
-    public Map<Integer, Integer[][]> getContainerList() {
+    public Map<Integer, Double[][]> getContainerList() {
         return containerList;
     }
 
-    public void setContainerList(Map<Integer, Integer[][]> containerList) {
+    public void setContainerList(Map<Integer, Double[][]> containerList) {
         this.containerList = containerList;
     }
 

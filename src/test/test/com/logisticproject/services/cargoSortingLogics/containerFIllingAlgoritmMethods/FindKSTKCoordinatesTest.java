@@ -21,7 +21,7 @@ public class FindKSTKCoordinatesTest {
     @Test
     public void findTemporaryCoordinatesCorrect() {
         Point TP_point = new Point(2, 2);
-        Integer[][] array = containerCreationService.create(12, 10);
+        Double[][] array = containerCreationService.create(12, 10);
         addCargoToContainerService.addToContainer(TP_point, array, cargo());
 
         List<Point> points = victim.findTemporaryCoordinates(TP_point, cargo());
@@ -83,4 +83,12 @@ public class FindKSTKCoordinatesTest {
             System.out.println();
         }*//*
 
-}*/
+
+    private Cargo cargo() {
+        Cargo cargo = new Cargo();
+        cargo.setCargoId((double)1);
+        cargo.setLength(8);
+        cargo.setWidth(5);
+        return cargo;
+    }
+}
