@@ -46,9 +46,8 @@ public class Point {
 
     @Override
     public String toString() {
-        return "ConstructionPoint{" +
-                "xValue=" + xValue +
-                ", yValue=" + yValue +
+        return "{axisX=" + xValue +
+                ", axisY=" + yValue +
                 '}';
     }
 }

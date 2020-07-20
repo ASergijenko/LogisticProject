@@ -28,12 +28,25 @@ public class ContainerFullnessCheckTest {
     }
 
     @Test
-    public void isSuitableCargoFalse() {
+    public void isSuitableCargoFalseBothSides() {
         Container container = new Container(10, 5, 1);
         List<Point> pointList = new ArrayList<>();
         pointList.add(new Point(1, 1));
         List<Cargo> cargoList = new ArrayList<>();
         cargoList.add(cargoBad());
+
+        assertFalse(victim.isSuitableCargo(cargoList, container, pointList));
+    }
+
+    @Test
+    public void isSuitableCargoFalseContainerNumber() {
+        Container container = new Container(10, 5, 1);
+        List<Point> pointList = new ArrayList<>();
+        pointList.add(new Point(1, 1));
+        List<Cargo> cargoList = new ArrayList<>();
+        Cargo cargo = cargoGood();
+        cargo.setContainerNumber(1);
+        cargoList.add(cargo);
 
         assertFalse(victim.isSuitableCargo(cargoList, container, pointList));
     }
@@ -53,7 +66,6 @@ public class ContainerFullnessCheckTest {
         cargo.setLength(10);
         cargo.setWidth(5);
         cargo.setSquare();
-//        cargo.setSquare(10 * 5);
         return cargo;
     }
 
@@ -62,7 +74,6 @@ public class ContainerFullnessCheckTest {
         cargo.setLength(11);
         cargo.setWidth(6);
         cargo.setSquare();
-//        cargo.setSquare(11 * 6);
         return cargo;
     }
 }
