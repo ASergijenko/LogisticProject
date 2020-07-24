@@ -38,9 +38,7 @@ public class SortingMain {
         Map<Integer, Double[][]> result = cargoSorting.cargoSortingProcess(cargoList);
 
         //Вывод данных
-        writer.write(cargoList, "src/main/resources/result.xlsx");
-
-
+        writer.write(cargoList, "src/main/resources/resultsetttttttttt.xlsx");
 
         for (Cargo cargo : cargoList) {
             System.out.println(cargo.toString());

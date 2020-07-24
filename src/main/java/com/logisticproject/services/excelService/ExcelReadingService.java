@@ -120,7 +120,7 @@ public class ExcelReadingService {
             id += cloningNumber;
             for (int j = 1; j < quantity; j++) {
                 Cargo copiedCargo = cargo.clone();
-                double rounded = Math.round(id * 100.0)/100.0;
+                double rounded = Math.round(id * Math.pow(10, powerNumber))/Math.pow(10, powerNumber);
                 copiedCargo.setCargoId(rounded);
                 cargoList.add(copiedCargo);
                 id += cloningNumber;
