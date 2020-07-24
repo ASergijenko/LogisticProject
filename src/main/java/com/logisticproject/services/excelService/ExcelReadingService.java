@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Component
 public class ExcelReadingService {
@@ -48,6 +49,7 @@ public class ExcelReadingService {
     }
 
     public List<Cargo> read(String excelFilePath) throws Exception {
+        int tempQuantity = 0;
         List<Cargo> cargoList = new ArrayList<>();
         FileInputStream inputStream = new FileInputStream(new File(excelFilePath));
 
@@ -98,22 +100,35 @@ public class ExcelReadingService {
             cargoValidationService.validate(cargo);
             cargoList.add(cargo);
 
-            if (cargo.getQuantity() > 1) {
-                int quantity = cargo.getQuantity();
-                cargo.setQuantity(1);
-                double id = cargo.getCargoId() + 0.01;
-                for (int i = 1; i < quantity; i++) {
-                    Cargo copiedCargo = cargo.clone();
-                    double rounded = Math.round(id * 100.0)/100.0;
-                    copiedCargo.setCargoId(rounded);
-                    cargoList.add(copiedCargo);
-                    id += 0.01;
-                }
+            if (tempQuantity < cargo.getQuantity()) {
+                tempQuantity = cargo.getQuantity();
+            }
+        }
+
+        ////находим значение остатка после запятой(нахождение порядка 10)
+        char character = Double.toString(Math.log10(tempQuantity)).charAt(0);
+        int powerNumber = Integer.parseInt(Character.toString(character)) + 1;
+        double cloningNumber = 1/Math.pow(10, powerNumber);
+
+        ////проходим по списку и меняем айдишки
+        List<Cargo> multiCargo = cargoList.stream().filter(cargo -> cargo.getQuantity() > 1).collect(Collectors.toList());
+        for (Cargo cargo : multiCargo) {
+            int quantity = cargo.getQuantity();
+
+            double id = cargo.getCargoId() + cloningNumber;
+            cargo.setCargoId(id);
+            id += cloningNumber;
+            for (int j = 1; j < quantity; j++) {
+                Cargo copiedCargo = cargo.clone();
+                double rounded = Math.round(id * 100.0)/100.0;
+                copiedCargo.setCargoId(rounded);
+                cargoList.add(copiedCargo);
+                id += cloningNumber;
             }
         }
 
         cargoList = listSortingService.sort(cargoList);
-        
+
         workbook.close();
         inputStream.close();
 

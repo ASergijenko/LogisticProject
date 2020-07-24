@@ -12,13 +12,13 @@ public class ContainerCreationService {
 
 //                array[length + 1][j] = 0;
 //                array[0][j] = 0;
-                array[length + 1][j] = j;//for test
-                array[0][j] = j;//for test
+                array[length + 1][j] = (double)j;//for test
+                array[0][j] = (double)j;//for test
             }
 //            array[i][width + 1] = 0;
 //            array[i + 1][0] = 0;
-            array[i][width + 1] = i;//for test
-            array[i + 1][0] = i+1;//for test
+            array[i][width + 1] = (double)i;//for test
+            array[i + 1][0] = (double)i+1;//for test
 
         }
         return array;
