@@ -5,9 +5,11 @@ import com.cargoproject.logisticproject.services.cargoSortingLogics.CargoSorting
 import com.cargoproject.logisticproject.services.excelService.ContainerToConsoleViewService;
 import com.cargoproject.logisticproject.services.excelService.ExcelReadingService;
 import com.cargoproject.logisticproject.services.excelService.ExcelWritingService;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -23,15 +25,15 @@ public class SortingMain {
     @Autowired
     private ContainerToConsoleViewService containerToConsoleViewService;
 
-    public void execute() throws Exception {
+    public File execute(XSSFWorkbook file) throws Exception {
         //Ввод данных
-        List<Cargo> cargoList = reader.read("src/main/resources/Table.xlsx");
+        List<Cargo> cargoList = reader.read(file);
 
         //Обработка
         Map<Integer, Double[][]> result = cargoSorting.cargoSortingProcess(cargoList);
 
         //Вывод данных
-        writer.write(cargoList, "src/main/resources/result.xlsx");
+        File calculatedFile = writer.write(cargoList, "src/main/resources/result.xlsx");
 
         for (Cargo cargo : cargoList) {
             System.out.println(cargo.toString());
@@ -43,5 +45,6 @@ public class SortingMain {
             containerToConsoleViewService.printToConsole(value);
             System.out.println();
         });
+        return calculatedFile;
     }
 }

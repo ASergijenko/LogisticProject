@@ -5,6 +5,7 @@ import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
 @Component
 public class ExcelWritingService {
 
-    public void write(List<Cargo> cargoList, String excelFilePath) throws IOException {
+    public File write(List<Cargo> cargoList, String excelFilePath) throws IOException {
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet();
 
@@ -100,9 +101,10 @@ public class ExcelWritingService {
                 }
             }
         }
-
-        try (FileOutputStream outputStream = new FileOutputStream(excelFilePath)) {
+        File xlsx = new File("cargolist.xlsx");
+        try (FileOutputStream outputStream = new FileOutputStream(xlsx)) {
             workbook.write(outputStream);
         }
+        return xlsx;
     }
 }

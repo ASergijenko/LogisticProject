@@ -48,13 +48,11 @@ public class ExcelReadingService {
         return (double)o;
     }
 
-    public List<Cargo> read(String excelFilePath) throws Exception {
+    public List<Cargo> read(XSSFWorkbook file) throws Exception {
         int tempQuantity = 0;
         List<Cargo> cargoList = new ArrayList<>();
-        FileInputStream inputStream = new FileInputStream(new File(excelFilePath));
 
-        Workbook workbook = new XSSFWorkbook(inputStream);
-        Sheet firstSheet = workbook.getSheetAt(0);
+        Sheet firstSheet = file.getSheetAt(0);
 
         for (Row nextRow : firstSheet) {
             if (nextRow.getRowNum() == 0) {
@@ -129,8 +127,7 @@ public class ExcelReadingService {
 
         cargoList = listSortingService.sort(cargoList);
 
-        workbook.close();
-        inputStream.close();
+        file.close();
 
         return cargoList;
     }
