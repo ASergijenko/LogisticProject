@@ -5,6 +5,7 @@ import com.logisticproject.services.excelService.ContainerToConsoleViewService;
 import com.logisticproject.services.cargoSortingLogics.CargoSorting;
 import com.logisticproject.services.excelService.ExcelReadingService;
 import com.logisticproject.services.excelService.ExcelWritingService;
+import com.logisticproject.services.excelService.TwoDArrayToImageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,6 +23,8 @@ public class SortingMain {
     private CargoSorting cargoSorting;
     @Autowired
     private ContainerToConsoleViewService containerToConsoleViewService;
+    @Autowired
+    private TwoDArrayToImageConverter twoDArrayToImageConverter;
 
     public void execute() throws Exception {
         //Считывание из excel
@@ -44,10 +47,14 @@ public class SortingMain {
             System.out.println(cargo.toString());
         }
 
+
         //Вывод данных
         result.forEach((key, value) -> {
             System.out.println("Container number: " + (key + 1));
             containerToConsoleViewService.printToConsole(value);
+
+            twoDArrayToImageConverter.writeImage(value, "src/main/resources/" + "CN" + key + 1 + ".png");
+
             System.out.println();
         });
     }
